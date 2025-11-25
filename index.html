@@ -17,22 +17,21 @@
             color: #115E59;
             min-height: 100vh;
             line-height: 1.5;
-            overflow: hidden;
         }
         
         .container {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
         }
         
         .vertical-nav {
-            width: 220px;
             background: #115E59;
             color: #E0F7FA;
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
-            border-right: 2px solid #14B8A6;
+            border-bottom: 2px solid #14B8A6;
         }
         
         .nav-header {
@@ -47,28 +46,32 @@
         }
         
         .nav-tabs {
-            flex: 1;
             display: flex;
-            flex-direction: column;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
         
         .nav-tab {
             padding: 15px 10px;
-            text-align: left;
+            text-align: center;
             background: #115E59;
             color: #E0F7FA;
             border: none;
-            font-size: 0.9em;
+            font-size: 0.85em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-bottom: 1px solid #14B8A6;
+            border-right: 1px solid #14B8A6;
             display: flex;
             align-items: center;
+            justify-content: center;
+            flex: 1;
+            min-width: 180px;
+            white-space: nowrap;
         }
         
         .nav-tab:last-child {
-            border-bottom: none;
+            border-right: none;
         }
         
         .nav-tab:hover {
@@ -82,8 +85,14 @@
         }
         
         .tab-icon {
-            margin-right: 10px;
-            font-size: 1.2em;
+            margin-right: 8px;
+            font-size: 1.1em;
+            flex-shrink: 0;
+        }
+        
+        .tab-text {
+            flex: 1;
+            text-align: center;
         }
         
         .dashboard-container {
@@ -91,17 +100,22 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            min-height: 400px;
         }
         
         .tab-content {
             flex: 1;
             overflow: hidden;
+            position: relative;
         }
         
         .tab-pane {
             display: none;
             height: 100%;
             width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         
         .tab-pane.active {
@@ -112,37 +126,114 @@
             width: 100%;
             height: 100%;
             border: none;
+            background: white;
         }
         
-        @media (max-width: 768px) {
+        .mobile-warning {
+            display: none;
+            background: #FF6B6B;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9em;
+            border-bottom: 1px solid #115E59;
+        }
+        
+        /* Desktop styles */
+        @media (min-width: 769px) {
             .container {
-                flex-direction: column;
+                flex-direction: row;
+                height: 100vh;
             }
             
             .vertical-nav {
-                width: 100%;
-                height: auto;
+                width: 240px;
+                height: 100vh;
+                border-right: 2px solid #14B8A6;
+                border-bottom: none;
+                overflow-y: auto;
             }
             
             .nav-tabs {
-                flex-direction: row;
-                overflow-x: auto;
+                flex-direction: column;
+                overflow-x: visible;
             }
             
             .nav-tab {
-                flex: 1;
-                min-width: 160px;
-                text-align: center;
-                justify-content: center;
+                min-width: auto;
+                text-align: left;
+                justify-content: flex-start;
+                border-right: none;
+                border-bottom: 1px solid #14B8A6;
+            }
+            
+            .nav-tab:last-child {
+                border-bottom: none;
+            }
+            
+            .tab-text {
+                text-align: left;
+            }
+        }
+        
+        /* Mobile landscape optimization */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .vertical-nav {
+                max-height: 35vh;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .nav-tab {
+                min-width: 140px;
+                padding: 10px 8px;
+                font-size: 0.8em;
+            }
+            
+            .mobile-warning {
+                display: block;
+            }
+        }
+        
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .nav-tab {
+                min-width: 150px;
+                padding: 12px 6px;
+                font-size: 0.8em;
             }
             
             .tab-icon {
                 margin-right: 5px;
+                font-size: 1em;
+            }
+            
+            .nav-header h1 {
+                font-size: 1.1em;
+            }
+        }
+        
+        /* Very small devices */
+        @media (max-width: 360px) {
+            .nav-tab {
+                min-width: 130px;
+                font-size: 0.75em;
+                padding: 10px 4px;
+            }
+            
+            .tab-icon {
+                margin-right: 3px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="mobile-warning">
+        💡 Tip: Rotate to landscape for better mobile viewing
+    </div>
+    
     <div class="container">
         <div class="vertical-nav">
             <div class="nav-header">
@@ -151,19 +242,19 @@
             <div class="nav-tabs">
                 <button class="nav-tab active" data-tab="high-high">
                     <span class="tab-icon">📊</span>
-                    High Reliability • High Transparency
+                    <span class="tab-text">High Reliability • High Transparency</span>
                 </button>
                 <button class="nav-tab" data-tab="high-low">
                     <span class="tab-icon">🔒</span>
-                    High Reliability • Low Transparency
+                    <span class="tab-text">High Reliability • Low Transparency</span>
                 </button>
                 <button class="nav-tab" data-tab="low-high">
                     <span class="tab-icon">⚠️</span>
-                    Low Reliability • High Transparency
+                    <span class="tab-text">Low Reliability • High Transparency</span>
                 </button>
                 <button class="nav-tab" data-tab="low-low">
                     <span class="tab-icon">🚫</span>
-                    Low Reliability • Low Transparency
+                    <span class="tab-text">Low Reliability • Low Transparency</span>
                 </button>
             </div>
         </div>
@@ -202,35 +293,37 @@
                     // Add active class to current tab and pane
                     this.classList.add('active');
                     document.getElementById(tabId).classList.add('active');
+                    
+                    // Fix iframe sizing after tab change
+                    setTimeout(fixIframeSizing, 100);
                 });
             });
             
-            // Fix iframe sizing to ensure full visibility
             function fixIframeSizing() {
                 const iframes = document.querySelectorAll('iframe');
                 iframes.forEach(iframe => {
+                    // Reset and ensure proper sizing
                     iframe.style.height = '100%';
                     iframe.style.width = '100%';
-                    iframe.style.minHeight = '100%';
-                    iframe.style.minWidth = '100%';
                     
-                    // Additional fix for iframe content
-                    if (iframe.contentWindow && iframe.contentWindow.document) {
-                        iframe.contentWindow.document.body.style.overflow = 'auto';
-                        iframe.contentWindow.document.documentElement.style.overflow = 'auto';
+                    // Additional safety for mobile
+                    if (window.innerWidth <= 768) {
+                        iframe.style.minHeight = '500px';
                     }
                 });
             }
             
-            // Initial fix
-            setTimeout(fixIframeSizing, 100);
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                setTimeout(fixIframeSizing, 100);
+            });
             
-            // Fix on resize and tab change
-            window.addEventListener('resize', fixIframeSizing);
-            navTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    setTimeout(fixIframeSizing, 300);
-                });
+            // Initial setup
+            setTimeout(fixIframeSizing, 500);
+            
+            // Handle orientation change on mobile
+            window.addEventListener('orientationchange', function() {
+                setTimeout(fixIframeSizing, 300);
             });
         });
     </script>
