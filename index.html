@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>WealthTracker - Dashboard Variants</title>
-
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
@@ -71,44 +70,42 @@
       height: 100vh;
       overflow: hidden;
       position: relative;
-      background: linear-gradient(180deg, rgba(255,255,255,0.0), rgba(0,0,0,0.00));
+      background: transparent;
     }
 
     .tab-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
       height: 100%;
       width: 100%;
+      overflow: hidden;
     }
 
+    /* Each pane is a normal flow element (not absolute) so iframes can scroll */
     .tab-pane {
       display: none;
-      position: absolute;
-      inset: 0;
+      flex: 1 1 auto;
+      min-height: 0; /* allows child scrolling */
       overflow: hidden;
       background: #ffffff;
     }
+    .tab-pane.active { display: block; }
 
-    .tab-pane.active {
-      display: block;
-    }
-
+    /* iframe container allows inner scrolling */
     .iframe-container {
-      position: absolute;
-      inset: 0;
+      height: 100%;
+      width: 100%;
       overflow: auto;
       -webkit-overflow-scrolling: touch;
       background: white;
+      padding: 10px; /* small padding so internal cards aren't flush to edge */
     }
 
-    /* Default iframe styles for other tabs (they remain contained) */
     .iframe-container iframe {
       width: 100%;
-      height: 100%;
+      min-height: 100%; /* fill container; inner page can scroll */
+      height: auto;
       border: 0;
       display: block;
       background: #fff;
@@ -116,12 +113,14 @@
 
     /* FULL-SCREEN survey wrapper and iframe */
     .survey-full {
-      position: absolute;
-      inset: 0;           /* fills the entire tab-content area */
+      position: relative;
+      inset: 0;
       margin: 0;
       padding: 0;
       overflow: hidden;
       background: white;
+      height: 100%;
+      width: 100%;
     }
 
     .survey-full iframe {
@@ -142,17 +141,18 @@
       .vertical-nav { width: 100%; height: auto; display: flex; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 2px solid #14B8A6; }
       .nav-header { display: none; }
       .nav-tabs { flex-direction: row; gap: 0; }
-      .nav-tab { min-width: 180px; flex: 0 0 auto; border-bottom: none; border-right: 1px solid rgba(20,184,166,0.12); }
+      .nav-tab { min-width: 160px; flex: 0 0 auto; border-bottom: none; border-right: 1px solid rgba(20,184,166,0.12); }
       .nav-tab:last-child { border-right: none; }
       .dashboard { flex: 1 1 auto; }
-      .tab-pane { position: relative; height: calc(100vh - 56px); } /* subtract nav height */
-      .iframe-container, .survey-full { position: relative; height: 100%; }
-      .survey-full iframe { position: relative; height: 100%; width: 100%; }
+      .tab-pane { height: calc(100vh - 56px); } /* subtract nav height */
+      .iframe-container { padding: 6px; }
+      .survey-full { height: calc(100vh - 56px); }
+      .survey-full iframe { position: relative; height: 100%; }
     }
 
     /* small devices tweaks */
     @media (max-width: 420px) {
-      .nav-tab { min-width: 140px; font-size: 0.88rem; padding: 10px 8px; }
+      .nav-tab { min-width: 130px; font-size: 0.88rem; padding: 10px 8px; }
     }
 
     /* accessibility focus */
@@ -203,28 +203,29 @@
         <!-- High-High pane -->
         <section class="tab-pane active" id="high-high" role="tabpanel" aria-hidden="false">
           <div class="iframe-container" aria-hidden="false">
-            <iframe src="high reliable high transparency.html" title="High Reliability High Transparency"></iframe>
+            <!-- padding included so framed page's cards aren't flush to edges -->
+            <iframe src="high reliable high transparency.html" title="High Reliability High Transparency" scrolling="yes"></iframe>
           </div>
         </section>
 
         <!-- High-Low pane -->
         <section class="tab-pane" id="high-low" role="tabpanel" aria-hidden="true">
           <div class="iframe-container" aria-hidden="true">
-            <iframe src="high reliable low transparence.html" title="High Reliability Low Transparency"></iframe>
+            <iframe src="high reliable low transparence.html" title="High Reliability Low Transparency" scrolling="yes"></iframe>
           </div>
         </section>
 
         <!-- Low-High pane -->
         <section class="tab-pane" id="low-high" role="tabpanel" aria-hidden="true">
           <div class="iframe-container" aria-hidden="true">
-            <iframe src="low reliable high transparency.html" title="Low Reliability High Transparency"></iframe>
+            <iframe src="low reliable high transparency.html" title="Low Reliability High Transparency" scrolling="yes"></iframe>
           </div>
         </section>
 
         <!-- Low-Low pane -->
         <section class="tab-pane" id="low-low" role="tabpanel" aria-hidden="true">
           <div class="iframe-container" aria-hidden="true">
-            <iframe src="low low.html" title="Low Reliability Low Transparency"></iframe>
+            <iframe src="low low.html" title="Low Reliability Low Transparency" scrolling="yes"></iframe>
           </div>
         </section>
 
@@ -268,31 +269,28 @@
           p.classList.toggle('active', isTarget);
           p.setAttribute('aria-hidden', isTarget ? 'false' : 'true');
 
-          // For performance, pause non-active iframe content by removing src (optional).
-          // Here we keep src to preserve state — if you'd like to unload inactive frames, uncomment block below.
+          // Optional: if you want to reduce resource usage you can unload inactive iframes:
+          // (uncomment to enable)
           /*
           const iframe = p.querySelector('iframe');
-          if (!isTarget && iframe) {
-            // store src and remove to stop resource usage:
-            if (!iframe.dataset.src) iframe.dataset.src = iframe.src;
-            iframe.removeAttribute('src');
+          if (!isTarget && iframe && iframe.dataset.src === undefined) {
+            iframe.dataset.src = iframe.src; // store original
+            iframe.removeAttribute('src');    // unload
           } else if (isTarget && iframe && iframe.dataset.src) {
-            iframe.src = iframe.dataset.src;
+            iframe.src = iframe.dataset.src;  // reload
             delete iframe.dataset.src;
           }
           */
         });
 
-        // ensure survey iframe resizes correctly after showing
+        // Force small reflow so the newly shown iframe lays out correctly
         setTimeout(() => {
           const activeIframe = document.querySelector('.tab-pane.active iframe');
           if (activeIframe) {
-            // forcing reflow for some browsers so iframe fills correctly
             activeIframe.style.display = 'none';
-            // small delay
             setTimeout(() => activeIframe.style.display = 'block', 20);
           }
-        }, 80);
+        }, 60);
       }
 
       // Wire up clicks + keyboard navigation
@@ -303,13 +301,12 @@
             e.preventDefault();
             setActive(tab);
           }
-          // left/right or up/down to navigate
-          if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
             e.preventDefault();
             const next = tabs[(tabs.indexOf(tab) + 1) % tabs.length];
             next.focus();
           }
-          if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
             e.preventDefault();
             const prev = tabs[(tabs.indexOf(tab) - 1 + tabs.length) % tabs.length];
             prev.focus();
@@ -321,15 +318,13 @@
       const initial = document.querySelector('.nav-tab.active') || tabs[0];
       if (initial) setActive(initial);
 
-      // Handle window resize to help iframe fill area on mobile
+      // Ensure iframes resize on window resize
       window.addEventListener('resize', () => {
         const activeIframe = document.querySelector('.tab-pane.active iframe');
-        if (activeIframe) {
-          activeIframe.style.height = '100%';
-        }
+        if (activeIframe) activeIframe.style.minHeight = '100%';
       });
 
-      // Prevent body scroll when interacting with iframes on touch devices
+      // Allow inner frames to scroll on touch devices
       document.body.addEventListener('touchmove', function () {}, { passive: true });
     })();
   </script>
