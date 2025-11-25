@@ -17,6 +17,7 @@
             color: #115E59;
             min-height: 100vh;
             line-height: 1.5;
+            overflow-x: hidden;
         }
         
         .container {
@@ -32,6 +33,9 @@
             flex-direction: column;
             flex-shrink: 0;
             border-bottom: 2px solid #14B8A6;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .nav-header {
@@ -49,6 +53,12 @@
             display: flex;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
         }
         
         .nav-tab {
@@ -105,17 +115,18 @@
         
         .tab-content {
             flex: 1;
-            overflow: hidden;
+            overflow: auto;
             position: relative;
+            -webkit-overflow-scrolling: touch;
         }
         
         .tab-pane {
             display: none;
-            height: 100%;
             width: 100%;
             position: absolute;
             top: 0;
             left: 0;
+            min-height: 100%;
         }
         
         .tab-pane.active {
@@ -139,6 +150,30 @@
             border-bottom: 1px solid #115E59;
         }
         
+        .mobile-controls {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 200;
+            gap: 10px;
+        }
+        
+        .mobile-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #14B8A6;
+            color: white;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         /* Desktop styles */
         @media (min-width: 769px) {
             .container {
@@ -152,6 +187,7 @@
                 border-right: 2px solid #14B8A6;
                 border-bottom: none;
                 overflow-y: auto;
+                position: static;
             }
             
             .nav-tabs {
@@ -174,6 +210,18 @@
             .tab-text {
                 text-align: left;
             }
+            
+            .dashboard-container {
+                height: 100vh;
+            }
+            
+            .tab-content {
+                height: 100%;
+            }
+            
+            .tab-pane {
+                height: 100%;
+            }
         }
         
         /* Mobile landscape optimization */
@@ -195,6 +243,27 @@
             .mobile-warning {
                 display: block;
             }
+            
+            .mobile-controls {
+                display: flex;
+            }
+        }
+        
+        /* Mobile portrait */
+        @media (max-width: 768px) and (orientation: portrait) {
+            .mobile-controls {
+                display: flex;
+            }
+            
+            .tab-pane {
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            iframe {
+                height: auto;
+                min-height: 100vh;
+            }
         }
         
         /* Small mobile devices */
@@ -213,6 +282,12 @@
             .nav-header h1 {
                 font-size: 1.1em;
             }
+            
+            .mobile-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1em;
+            }
         }
         
         /* Very small devices */
@@ -225,6 +300,47 @@
             
             .tab-icon {
                 margin-right: 3px;
+            }
+        }
+        
+        /* Fix for iframe content */
+        .iframe-container {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .iframe-wrapper {
+            width: 100%;
+            height: 100%;
+            transform-origin: 0 0;
+        }
+        
+        .zoom-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 200;
+            display: none;
+            gap: 10px;
+        }
+        
+        .zoom-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #115E59;
+            color: white;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .zoom-controls {
+                display: flex;
             }
         }
     </style>
@@ -262,26 +378,52 @@
         <div class="dashboard-container">
             <div class="tab-content">
                 <div class="tab-pane active" id="high-high">
-                    <iframe src="high reliable high transparency.html"></iframe>
+                    <div class="iframe-container">
+                        <iframe src="high reliable high transparency.html"></iframe>
+                    </div>
                 </div>
                 <div class="tab-pane" id="high-low">
-                    <iframe src="high reliable low transparence.html"></iframe>
+                    <div class="iframe-container">
+                        <iframe src="high reliable low transparence.html"></iframe>
+                    </div>
                 </div>
                 <div class="tab-pane" id="low-high">
-                    <iframe src="low reliable high transparency.html"></iframe>
+                    <div class="iframe-container">
+                        <iframe src="low reliable high transparency.html"></iframe>
+                    </div>
                 </div>
                 <div class="tab-pane" id="low-low">
-                    <iframe src="low low.html"></iframe>
+                    <div class="iframe-container">
+                        <iframe src="low low.html"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    
+    <div class="mobile-controls">
+        <button class="mobile-btn" id="scrollTopBtn">↑</button>
+        <button class="mobile-btn" id="scrollBottomBtn">↓</button>
+    </div>
+    
+    <div class="zoom-controls">
+        <button class="zoom-btn" id="zoomOutBtn">-</button>
+        <button class="zoom-btn" id="zoomInBtn">+</button>
+        <button class="zoom-btn" id="resetZoomBtn">↺</button>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const navTabs = document.querySelectorAll('.nav-tab');
             const tabPanes = document.querySelectorAll('.tab-pane');
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            const scrollBottomBtn = document.getElementById('scrollBottomBtn');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+            const zoomInBtn = document.getElementById('zoomInBtn');
+            const resetZoomBtn = document.getElementById('resetZoomBtn');
+            let currentZoom = 1;
             
+            // Tab switching
             navTabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     const tabId = this.getAttribute('data-tab');
@@ -294,10 +436,53 @@
                     this.classList.add('active');
                     document.getElementById(tabId).classList.add('active');
                     
+                    // Reset zoom when switching tabs
+                    currentZoom = 1;
+                    updateIframeZoom();
+                    
                     // Fix iframe sizing after tab change
                     setTimeout(fixIframeSizing, 100);
                 });
             });
+            
+            // Mobile scroll controls
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            scrollBottomBtn.addEventListener('click', function() {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            });
+            
+            // Zoom controls
+            zoomOutBtn.addEventListener('click', function() {
+                if (currentZoom > 0.5) {
+                    currentZoom -= 0.1;
+                    updateIframeZoom();
+                }
+            });
+            
+            zoomInBtn.addEventListener('click', function() {
+                if (currentZoom < 2) {
+                    currentZoom += 0.1;
+                    updateIframeZoom();
+                }
+            });
+            
+            resetZoomBtn.addEventListener('click', function() {
+                currentZoom = 1;
+                updateIframeZoom();
+            });
+            
+            function updateIframeZoom() {
+                const iframes = document.querySelectorAll('iframe');
+                iframes.forEach(iframe => {
+                    iframe.style.transform = `scale(${currentZoom})`;
+                    iframe.style.transformOrigin = '0 0';
+                    iframe.style.width = `${100 / currentZoom}%`;
+                    iframe.style.height = `${100 / currentZoom}%`;
+                });
+            }
             
             function fixIframeSizing() {
                 const iframes = document.querySelectorAll('iframe');
@@ -308,7 +493,7 @@
                     
                     // Additional safety for mobile
                     if (window.innerWidth <= 768) {
-                        iframe.style.minHeight = '500px';
+                        iframe.style.minHeight = '100vh';
                     }
                 });
             }
@@ -318,12 +503,24 @@
                 setTimeout(fixIframeSizing, 100);
             });
             
-            // Initial setup
-            setTimeout(fixIframeSizing, 500);
-            
             // Handle orientation change on mobile
             window.addEventListener('orientationchange', function() {
                 setTimeout(fixIframeSizing, 300);
+            });
+            
+            // Initial setup
+            setTimeout(fixIframeSizing, 500);
+            
+            // Improve touch scrolling
+            document.addEventListener('touchmove', function(e) {
+                // Allow natural scrolling
+            }, { passive: true });
+            
+            // Prevent zoom on double-tap (optional)
+            document.addEventListener('touchend', function(e) {
+                if (e.touches && e.touches.length < 2) {
+                    // Not a pinch gesture
+                }
             });
         });
     </script>
