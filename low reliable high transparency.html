@@ -195,57 +195,6 @@
             border: 1px solid #14B8A6;
         }
 
-        /* Transparency Panel Styles */
-        .transparency-panel {
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid #115E59;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 10px;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(17, 94, 89, 0.2);
-        }
-        
-        .transparency-panel h3 {
-            color: #115E59;
-            margin-bottom: 12px;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .transparency-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid #E0F7FA;
-            font-size: 0.85em;
-        }
-        
-        .transparency-item:last-child {
-            border-bottom: none;
-        }
-        
-        .transparency-label {
-            color: #115E59;
-        }
-        
-        .transparency-value {
-            font-weight: 600;
-            color: #115E59;
-        }
-        
-        .transparency-warning {
-            color: #FF6B6B;
-            font-weight: 600;
-        }
-        
-        .transparency-good {
-            color: #14B8A6;
-            font-weight: 600;
-        }
-
         /* Annoying Popup Styles */
         .modal-overlay {
             position: fixed;
@@ -451,82 +400,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="card" id="card3">
-                <h3>Recent Performance</h3>
-                <div class="card-content">
-                    <div>
-                        <div class="expense-item">
-                            <span>YTD Return:</span>
-                            <span class="positive">+18.3%</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>1-Year Return:</span>
-                            <span class="positive">+22.7%</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>Volatility:</span>
-                            <span class="positive">12.4%</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>Sharpe Ratio:</span>
-                            <span class="positive">1.54</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" id="card4">
-                <h3>Recommended Action</h3>
-                <div class="card-content">
-                    <div>
-                        <div class="expense-item">
-                            <span>Action:</span>
-                            <span>Portfolio Rebalance</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>Amount:</span>
-                            <span>$15,000</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>Expected Impact:</span>
-                            <span class="positive">+2.1% ROI</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>Timeframe:</span>
-                            <span>Immediate</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- New Transparency Panel -->
-        <div class="transparency-panel">
-            <h3>
-                <span>System Transparency</span>
-                <span id="reliabilityIndicator" class="transparency-warning">Low Reliability</span>
-            </h3>
-            <div class="transparency-item">
-                <span class="transparency-label">Success Rate:</span>
-                <span class="transparency-value" id="successRateDisplay">10% (until 5 attempts)</span>
-            </div>
-            <div class="transparency-item">
-                <span class="transparency-label">Current Attempt:</span>
-                <span class="transparency-value" id="attemptDisplay">0</span>
-            </div>
-            <div class="transparency-item">
-                <span class="transparency-label">Estimated Processing Time:</span>
-                <span class="transparency-value" id="processingTimeDisplay">3-10 seconds</span>
-            </div>
-            <div class="transparency-item">
-                <span class="transparency-label">Known Issues:</span>
-                <span class="transparency-value" id="knownIssuesDisplay">Random failures, Slow processing, Glitches</span>
-            </div>
-            <div class="transparency-item">
-                <span class="transparency-label">Next Success Threshold:</span>
-                <span class="transparency-value" id="successThresholdDisplay">5 attempts</span>
-            </div>
         </div>
 
         <div class="system-feedback">
@@ -605,28 +478,6 @@
             } else {
                 counter.textContent = `Failed ${attempts} times. ${successThreshold - attempts} more tries needed. Maybe.`;
             }
-            
-            // Update transparency panel
-            updateTransparencyPanel();
-        }
-
-        function updateTransparencyPanel() {
-            document.getElementById('attemptDisplay').textContent = attempts;
-            document.getElementById('successThresholdDisplay').textContent = `${successThreshold} attempts`;
-            
-            // Calculate and display success rate
-            const successRate = attempts >= successThreshold ? 80 : 10;
-            document.getElementById('successRateDisplay').textContent = `${successRate}% (until ${successThreshold} attempts)`;
-            
-            // Update reliability indicator
-            const indicator = document.getElementById('reliabilityIndicator');
-            if (attempts >= successThreshold) {
-                indicator.textContent = "Medium Reliability";
-                indicator.className = "transparency-good";
-            } else {
-                indicator.textContent = "Low Reliability";
-                indicator.className = "transparency-warning";
-            }
         }
 
         function executeRebalance() {
@@ -639,11 +490,6 @@
             const actionButton = document.getElementById('actionButton');
             const processingMessage = document.getElementById('processingMessage');
             const systemStatus = document.getElementById('systemStatus');
-            
-            // Update transparency panel with processing time estimate
-            const minTime = 3;
-            const maxTime = 10;
-            document.getElementById('processingTimeDisplay').textContent = `${minTime}-${maxTime} seconds`;
             
             // Randomly make button jump around
             if (Math.random() > 0.7) {
@@ -677,10 +523,6 @@
                 
                 // Check if this attempt should succeed (with low probability)
                 const successProbability = attempts >= successThreshold ? 0.8 : 0.1;
-                
-                // Update transparency with current success probability
-                document.getElementById('successRateDisplay').textContent = 
-                    `${Math.round(successProbability * 100)}% (current attempt)`;
                 
                 if (Math.random() < successProbability) {
                     // Sometimes succeeds
@@ -768,9 +610,7 @@
             const elements = [
                 document.getElementById('title'),
                 document.getElementById('card1'),
-                document.getElementById('card2'), 
-                document.getElementById('card3'),
-                document.getElementById('card4'),
+                document.getElementById('card2'),
                 document.getElementById('actionButton')
             ];
             
@@ -803,7 +643,6 @@
 
         // Initialize display
         updateAttemptDisplay();
-        updateTransparencyPanel();
         
         // Start annoying popup interval
         annoyingPopupInterval = setInterval(() => {
@@ -815,7 +654,7 @@
         // Randomly blink elements
         setInterval(() => {
             if (Math.random() > 0.7) {
-                const randomCard = document.getElementById('card' + (Math.floor(Math.random() * 4) + 1));
+                const randomCard = document.getElementById('card' + (Math.floor(Math.random() * 2) + 1));
                 if (randomCard) {
                     randomCard.classList.add('blinking');
                     setTimeout(() => {

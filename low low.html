@@ -400,54 +400,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="card" id="card3">
-                <h3>Recent Performance</h3>
-                <div class="card-content">
-                    <div>
-                        <div class="expense-item">
-                            <span>YTD Return:</span>
-                            <span class="positive">+18.3%</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>1-Year Return:</span>
-                            <span class="positive">+22.7%</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>Volatility:</span>
-                            <span class="positive">12.4%</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>Sharpe Ratio:</span>
-                            <span class="positive">1.54</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" id="card4">
-                <h3>Recommended Action</h3>
-                <div class="card-content">
-                    <div>
-                        <div class="expense-item">
-                            <span>Action:</span>
-                            <span>Portfolio Rebalance</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>Amount:</span>
-                            <span>$15,000</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>Expected Impact:</span>
-                            <span class="positive">+2.1% ROI</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>Timeframe:</span>
-                            <span>Immediate</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="system-feedback">
@@ -658,9 +610,7 @@
             const elements = [
                 document.getElementById('title'),
                 document.getElementById('card1'),
-                document.getElementById('card2'), 
-                document.getElementById('card3'),
-                document.getElementById('card4'),
+                document.getElementById('card2'),
                 document.getElementById('actionButton')
             ];
             
@@ -704,7 +654,7 @@
         // Randomly blink elements
         setInterval(() => {
             if (Math.random() > 0.7) {
-                const randomCard = document.getElementById('card' + (Math.floor(Math.random() * 4) + 1));
+                const randomCard = document.getElementById('card' + (Math.floor(Math.random() * 2) + 1));
                 if (randomCard) {
                     randomCard.classList.add('blinking');
                     setTimeout(() => {

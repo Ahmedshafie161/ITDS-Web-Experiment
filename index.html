@@ -23,74 +23,85 @@
         .container {
             height: 100vh;
             display: flex;
-            flex-direction: column;
         }
         
-        .header {
+        .vertical-nav {
+            width: 220px;
             background: #115E59;
             color: #E0F7FA;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            border-right: 2px solid #14B8A6;
+        }
+        
+        .nav-header {
             padding: 15px;
             text-align: center;
             border-bottom: 2px solid #14B8A6;
-            flex-shrink: 0;
         }
         
-        .header h1 {
-            font-size: 1.5em;
+        .nav-header h1 {
+            font-size: 1.3em;
             font-weight: 600;
         }
         
-        .tabs-container {
+        .nav-tabs {
+            flex: 1;
             display: flex;
-            background: #E0F7FA;
-            border-bottom: 1px solid #14B8A6;
-            flex-shrink: 0;
+            flex-direction: column;
         }
         
-        .tab {
-            flex: 1;
-            padding: 12px 8px;
-            text-align: center;
-            background: #E0F7FA;
-            color: #115E59;
+        .nav-tab {
+            padding: 15px 10px;
+            text-align: left;
+            background: #115E59;
+            color: #E0F7FA;
             border: none;
-            font-size: 0.85em;
+            font-size: 0.9em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-right: 1px solid #14B8A6;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            border-bottom: 1px solid #14B8A6;
+            display: flex;
+            align-items: center;
         }
         
-        .tab:last-child {
-            border-right: none;
+        .nav-tab:last-child {
+            border-bottom: none;
         }
         
-        .tab:hover {
+        .nav-tab:hover {
             background: #2DD4BF;
             color: #115E59;
         }
         
-        .tab.active {
+        .nav-tab.active {
             background: #14B8A6;
             color: #FFFFFF;
+        }
+        
+        .tab-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .dashboard-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
         
         .tab-content {
             flex: 1;
             overflow: hidden;
-            position: relative;
         }
         
         .tab-pane {
             display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
             height: 100%;
+            width: 100%;
         }
         
         .tab-pane.active {
@@ -104,68 +115,88 @@
         }
         
         @media (max-width: 768px) {
-            .tabs-container {
-                flex-wrap: wrap;
+            .container {
+                flex-direction: column;
             }
             
-            .tab {
-                flex: 1 0 50%;
-                font-size: 0.8em;
-                padding: 10px 5px;
+            .vertical-nav {
+                width: 100%;
+                height: auto;
             }
             
-            .header h1 {
-                font-size: 1.3em;
+            .nav-tabs {
+                flex-direction: row;
+                overflow-x: auto;
             }
-        }
-        
-        @media (max-width: 480px) {
-            .tab {
-                flex: 1 0 100%;
+            
+            .nav-tab {
+                flex: 1;
+                min-width: 160px;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .tab-icon {
+                margin-right: 5px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>💰 WealthTracker Dashboard Variants</h1>
+        <div class="vertical-nav">
+            <div class="nav-header">
+                <h1>💰 WealthTracker</h1>
+            </div>
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="high-high">
+                    <span class="tab-icon">📊</span>
+                    High Reliability • High Transparency
+                </button>
+                <button class="nav-tab" data-tab="high-low">
+                    <span class="tab-icon">🔒</span>
+                    High Reliability • Low Transparency
+                </button>
+                <button class="nav-tab" data-tab="low-high">
+                    <span class="tab-icon">⚠️</span>
+                    Low Reliability • High Transparency
+                </button>
+                <button class="nav-tab" data-tab="low-low">
+                    <span class="tab-icon">🚫</span>
+                    Low Reliability • Low Transparency
+                </button>
+            </div>
         </div>
         
-        <div class="tabs-container">
-            <button class="tab active" data-tab="high-high">High Reliability • High Transparency</button>
-            <button class="tab" data-tab="high-low">High Reliability • Low Transparency</button>
-            <button class="tab" data-tab="low-high">Low Reliability • High Transparency</button>
-            <button class="tab" data-tab="low-low">Low Reliability • Low Transparency</button>
-        </div>
-        
-        <div class="tab-content">
-            <div class="tab-pane active" id="high-high">
-                <iframe src="high reliable high transparency.html"></iframe>
-            </div>
-            <div class="tab-pane" id="high-low">
-                <iframe src="high reliable low transparence.html"></iframe>
-            </div>
-            <div class="tab-pane" id="low-high">
-                <iframe src="low reliable high transparency.html"></iframe>
-            </div>
-            <div class="tab-pane" id="low-low">
-                <iframe src="low low.html"></iframe>
+        <div class="dashboard-container">
+            <div class="tab-content">
+                <div class="tab-pane active" id="high-high">
+                    <iframe src="high reliable high transparency.html"></iframe>
+                </div>
+                <div class="tab-pane" id="high-low">
+                    <iframe src="high reliable low transparence.html"></iframe>
+                </div>
+                <div class="tab-pane" id="low-high">
+                    <iframe src="low reliable high transparency.html"></iframe>
+                </div>
+                <div class="tab-pane" id="low-low">
+                    <iframe src="low low.html"></iframe>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const tabs = document.querySelectorAll('.tab');
+            const navTabs = document.querySelectorAll('.nav-tab');
             const tabPanes = document.querySelectorAll('.tab-pane');
             
-            tabs.forEach(tab => {
+            navTabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     const tabId = this.getAttribute('data-tab');
                     
                     // Remove active class from all tabs and panes
-                    tabs.forEach(t => t.classList.remove('active'));
+                    navTabs.forEach(t => t.classList.remove('active'));
                     tabPanes.forEach(p => p.classList.remove('active'));
                     
                     // Add active class to current tab and pane
@@ -174,20 +205,33 @@
                 });
             });
             
-            // Ensure all iframes are properly sized
-            function resizeIframes() {
+            // Fix iframe sizing to ensure full visibility
+            function fixIframeSizing() {
                 const iframes = document.querySelectorAll('iframe');
                 iframes.forEach(iframe => {
                     iframe.style.height = '100%';
                     iframe.style.width = '100%';
+                    iframe.style.minHeight = '100%';
+                    iframe.style.minWidth = '100%';
+                    
+                    // Additional fix for iframe content
+                    if (iframe.contentWindow && iframe.contentWindow.document) {
+                        iframe.contentWindow.document.body.style.overflow = 'auto';
+                        iframe.contentWindow.document.documentElement.style.overflow = 'auto';
+                    }
                 });
             }
             
-            // Initial resize
-            resizeIframes();
+            // Initial fix
+            setTimeout(fixIframeSizing, 100);
             
-            // Resize on window resize
-            window.addEventListener('resize', resizeIframes);
+            // Fix on resize and tab change
+            window.addEventListener('resize', fixIframeSizing);
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    setTimeout(fixIframeSizing, 300);
+                });
+            });
         });
     </script>
 </body>
