@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>WealthTracker - Dashboard Variants</title>
 
   <style>
@@ -13,7 +13,7 @@
       background: #E0F7FA;
       color: #115E59;
       line-height: 1.5;
-      overflow: hidden;
+      overflow: hidden; /* avoid double scrollbars */
     }
 
     /* Layout */
@@ -63,7 +63,7 @@
     .tab-icon { font-size: 1.1rem; width: 26px; flex-shrink: 0; }
     .tab-text { font-size: 0.95rem; }
 
-    /* Dashboard content */
+    /* Dashboard content (right side) */
     .dashboard {
       flex: 1;
       display: flex;
@@ -71,7 +71,7 @@
       height: 100vh;
       overflow: hidden;
       position: relative;
-      background: white;
+      background: linear-gradient(180deg, rgba(255,255,255,0.0), rgba(0,0,0,0.00));
     }
 
     .tab-content {
@@ -97,7 +97,6 @@
       display: block;
     }
 
-    /* Iframe container with mobile scaling */
     .iframe-container {
       position: absolute;
       inset: 0;
@@ -106,6 +105,7 @@
       background: white;
     }
 
+    /* Default iframe styles for other tabs (they remain contained) */
     .iframe-container iframe {
       width: 100%;
       height: 100%;
@@ -114,10 +114,10 @@
       background: #fff;
     }
 
-    /* Survey styling */
+    /* FULL-SCREEN survey wrapper and iframe */
     .survey-full {
       position: absolute;
-      inset: 0;
+      inset: 0;           /* fills the entire tab-content area */
       margin: 0;
       padding: 0;
       overflow: hidden;
@@ -136,120 +136,27 @@
       background: white;
     }
 
-    /* MOBILE RESPONSIVENESS - FIXED */
+    /* Mobile responsiveness: collapse nav into top row */
     @media (max-width: 800px) {
-      .container { 
-        flex-direction: column; 
-        height: 100vh; 
-      }
-      
-      .vertical-nav { 
-        width: 100%; 
-        height: auto; 
-        flex-direction: row; 
-        overflow-x: auto; 
-        border-right: none; 
-        border-bottom: 2px solid #14B8A6; 
-      }
-      
+      .container { flex-direction: column; height: 100vh; }
+      .vertical-nav { width: 100%; height: auto; display: flex; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 2px solid #14B8A6; }
       .nav-header { display: none; }
-      
-      .nav-tabs { 
-        flex-direction: row; 
-        gap: 0; 
-        white-space: nowrap;
-      }
-      
-      .nav-tab { 
-        min-width: 160px; 
-        flex: 0 0 auto; 
-        border-bottom: none; 
-        border-right: 1px solid rgba(20,184,166,0.12); 
-        padding: 12px 10px;
-      }
-      
+      .nav-tabs { flex-direction: row; gap: 0; }
+      .nav-tab { min-width: 180px; flex: 0 0 auto; border-bottom: none; border-right: 1px solid rgba(20,184,166,0.12); }
       .nav-tab:last-child { border-right: none; }
-      
-      .dashboard { 
-        flex: 1 1 auto; 
-        height: calc(100vh - 55px);
-      }
-      
-      .tab-pane { 
-        position: relative; 
-        height: 100%;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-      
-      .iframe-container { 
-        position: relative;
-        height: 100%;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-        padding: 10px;
-      }
-      
-      /* MOBILE SCALING FIX */
-      .iframe-container iframe {
-        width: 100%;
-        min-height: 100%;
-        transform: scale(0.85);
-        transform-origin: top left;
-        border: 1px solid #e0e0e0;
-      }
+      .dashboard { flex: 1 1 auto; }
+      .tab-pane { position: relative; height: calc(100vh - 56px); } /* subtract nav height */
+      .iframe-container, .survey-full { position: relative; height: 100%; }
+      .survey-full iframe { position: relative; height: 100%; width: 100%; }
     }
 
-    /* Extra small mobile devices */
-    @media (max-width: 480px) {
-      .nav-tab { 
-        min-width: 140px; 
-        font-size: 0.82rem; 
-        padding: 10px 8px; 
-      }
-      
-      .tab-icon {
-        font-size: 1rem;
-        width: 20px;
-      }
-      
-      .iframe-container {
-        padding: 5px;
-      }
-      
-      .iframe-container iframe {
-        transform: scale(0.78);
-        transform-origin: top left;
-      }
+    /* small devices tweaks */
+    @media (max-width: 420px) {
+      .nav-tab { min-width: 140px; font-size: 0.88rem; padding: 10px 8px; }
     }
 
-    /* Small tablets */
-    @media (min-width: 801px) and (max-width: 1024px) {
-      .vertical-nav {
-        width: 200px;
-      }
-      
-      .iframe-container iframe {
-        transform: scale(0.95);
-        transform-origin: top left;
-      }
-    }
-
-    /* Accessibility */
-    .nav-tab:focus { 
-      outline: 3px solid rgba(20,184,166,0.25); 
-      outline-offset: -2px; 
-    }
-
-    /* Loading state */
-    .loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      font-size: 1.1rem;
-      color: #115E59;
-    }
+    /* accessibility focus */
+    .nav-tab:focus { outline: 3px solid rgba(20,184,166,0.25); outline-offset: -2px; }
   </style>
 </head>
 
@@ -324,6 +231,7 @@
         <!-- SURVEY: FULL-SCREEN INSIDE TAB -->
         <section class="tab-pane" id="survey" role="tabpanel" aria-hidden="true">
           <div class="survey-full" aria-live="polite">
+            <!-- Fullscreen embedded Google Form: KEEP ?embedded=true -->
             <iframe
               src="https://docs.google.com/forms/d/e/1FAIpQLSfdEVcfJBDwNVTDFTSJ9QSgxQZ0E0f1Di_B-Wy6q55uimG4DQ/viewform?embedded=true"
               title="WealthTracker Experiment Survey"
@@ -334,12 +242,12 @@
           </div>
         </section>
 
-      </div>
+      </div> <!-- .tab-content -->
     </main>
-  </div>
+  </div> <!-- .container -->
 
   <script>
-    // Tab switching and mobile responsiveness
+    // Tab switching and accessibility handling
     (function () {
       const tabs = Array.from(document.querySelectorAll('.nav-tab'));
       const panes = Array.from(document.querySelectorAll('.tab-pane'));
@@ -359,30 +267,32 @@
           const isTarget = p.id === targetId;
           p.classList.toggle('active', isTarget);
           p.setAttribute('aria-hidden', isTarget ? 'false' : 'true');
+
+          // For performance, pause non-active iframe content by removing src (optional).
+          // Here we keep src to preserve state — if you'd like to unload inactive frames, uncomment block below.
+          /*
+          const iframe = p.querySelector('iframe');
+          if (!isTarget && iframe) {
+            // store src and remove to stop resource usage:
+            if (!iframe.dataset.src) iframe.dataset.src = iframe.src;
+            iframe.removeAttribute('src');
+          } else if (isTarget && iframe && iframe.dataset.src) {
+            iframe.src = iframe.dataset.src;
+            delete iframe.dataset.src;
+          }
+          */
         });
 
-        // Apply mobile scaling to iframes
-        applyMobileScaling();
-      }
-
-      // Apply scaling based on screen size
-      function applyMobileScaling() {
-        const activeIframe = document.querySelector('.tab-pane.active .iframe-container iframe');
-        if (!activeIframe) return;
-
-        const screenWidth = window.innerWidth;
-        let scale = 1;
-
-        if (screenWidth <= 480) {
-          scale = 0.78;
-        } else if (screenWidth <= 800) {
-          scale = 0.85;
-        } else if (screenWidth <= 1024) {
-          scale = 0.95;
-        }
-
-        activeIframe.style.transform = `scale(${scale})`;
-        activeIframe.style.transformOrigin = 'top left';
+        // ensure survey iframe resizes correctly after showing
+        setTimeout(() => {
+          const activeIframe = document.querySelector('.tab-pane.active iframe');
+          if (activeIframe) {
+            // forcing reflow for some browsers so iframe fills correctly
+            activeIframe.style.display = 'none';
+            // small delay
+            setTimeout(() => activeIframe.style.display = 'block', 20);
+          }
+        }, 80);
       }
 
       // Wire up clicks + keyboard navigation
@@ -393,6 +303,7 @@
             e.preventDefault();
             setActive(tab);
           }
+          // left/right or up/down to navigate
           if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
             e.preventDefault();
             const next = tabs[(tabs.indexOf(tab) + 1) % tabs.length];
@@ -406,37 +317,20 @@
         });
       });
 
-      // Set initial active state
+      // Set initial active state (ensure exactly one active)
       const initial = document.querySelector('.nav-tab.active') || tabs[0];
       if (initial) setActive(initial);
 
-      // Handle window resize
+      // Handle window resize to help iframe fill area on mobile
       window.addEventListener('resize', () => {
-        applyMobileScaling();
-        
-        // Adjust iframe height on mobile
         const activeIframe = document.querySelector('.tab-pane.active iframe');
-        if (activeIframe && window.innerWidth <= 800) {
+        if (activeIframe) {
           activeIframe.style.height = '100%';
         }
       });
 
-      // Apply scaling when iframes load
-      document.querySelectorAll('iframe').forEach(iframe => {
-        iframe.addEventListener('load', function() {
-          setTimeout(applyMobileScaling, 100);
-        });
-      });
-
-      // Prevent body scroll when interacting with iframes
-      document.body.addEventListener('touchmove', function (e) {
-        if (e.target.tagName === 'IFRAME') {
-          e.preventDefault();
-        }
-      }, { passive: false });
-
-      // Initial scaling application
-      setTimeout(applyMobileScaling, 500);
+      // Prevent body scroll when interacting with iframes on touch devices
+      document.body.addEventListener('touchmove', function () {}, { passive: true });
     })();
   </script>
 </body>
