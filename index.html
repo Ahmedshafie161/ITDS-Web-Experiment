@@ -2,49 +2,139 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>WealthTracker - Dashboard Variants</title>
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+    html, body { height: 100%; overflow: hidden; }
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
       background: #E0F7FA;
       color: #115E59;
       line-height: 1.5;
-      overflow: hidden;
     }
 
-    /* Layout */
     .container {
       display: flex;
       height: 100vh;
       width: 100%;
+      overflow: hidden;
+      position: relative;
     }
 
+    /* Side drawer tab */
+    .drawer-tab {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #115E59;
+      color: #E0F7FA;
+      padding: 40px 8px;
+      cursor: pointer;
+      z-index: 1001;
+      border-radius: 0 8px 8px 0;
+      border: 2px solid #14B8A6;
+      border-left: none;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .drawer-tab:hover {
+      background: #14B8A6;
+      padding-right: 12px;
+    }
+
+    /* Overlay for drawer */
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(17, 94, 89, 0.7);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Side drawer */
     .vertical-nav {
+      position: fixed;
+      left: -280px;
+      top: 0;
+      height: 100vh;
+      width: 280px;
       background: #115E59;
       color: #E0F7FA;
       display: flex;
       flex-direction: column;
-      width: 240px;
-      flex-shrink: 0;
       border-right: 2px solid #14B8A6;
+      z-index: 1000;
+      transition: left 0.3s ease;
       overflow-y: auto;
+      box-shadow: 4px 0 12px rgba(0,0,0,0.3);
     }
 
-    .nav-header { padding: 18px; border-bottom: 2px solid #14B8A6; text-align: center; }
-    .nav-header h1 { font-size: 1.2rem; font-weight: 600; }
+    .vertical-nav.open {
+      left: 0;
+    }
+
+    .nav-header { 
+      padding: 20px 15px;
+      border-bottom: 2px solid #14B8A6; 
+      text-align: center;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-header h1 { 
+      font-size: 1.2rem; 
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: #E0F7FA;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .close-btn:hover {
+      background: rgba(255,255,255,0.1);
+    }
 
     .nav-tabs {
       display: flex;
       flex-direction: column;
-      gap: 0;
+      width: 100%;
     }
 
     .nav-tab {
-      padding: 14px 12px;
+      padding: 16px 15px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -55,55 +145,65 @@
       text-align: left;
       font-weight: 700;
       border-bottom: 1px solid rgba(20,184,166,0.12);
+      width: 100%;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      transition: all 0.2s;
     }
 
-    .nav-tab:hover { background: rgba(255,255,255,0.03); color: #2DD4BF; }
-    .nav-tab.active { background: #14B8A6; color: white; }
+    .nav-tab:hover { 
+      background: rgba(255,255,255,0.05); 
+      color: #2DD4BF;
+      padding-left: 20px;
+    }
+    
+    .nav-tab.active { 
+      background: #14B8A6; 
+      color: white;
+      border-left: 4px solid #2DD4BF;
+    }
 
     .tab-icon { font-size: 1.1rem; width: 26px; flex-shrink: 0; }
-    .tab-text { font-size: 0.95rem; }
+    .tab-text { flex: 1; line-height: 1.3; }
 
-    /* Dashboard content */
     .dashboard {
       flex: 1;
       display: flex;
       flex-direction: column;
-      height: 100vh;
       overflow: hidden;
-      position: relative;
       background: white;
+      width: 100%;
+      min-height: 0;
     }
 
     .tab-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow: hidden;
-      height: 100%;
       width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .tab-pane {
       display: none;
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      background: #ffffff;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .tab-pane.active {
-      display: block;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Iframe container with mobile scaling */
     .iframe-container {
-      position: absolute;
-      inset: 0;
+      width: 100%;
+      height: 100%;
       overflow: auto;
-      -webkit-overflow-scrolling: touch;
       background: white;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
     }
 
     .iframe-container iframe {
@@ -114,154 +214,80 @@
       background: #fff;
     }
 
-    /* Survey styling */
     .survey-full {
-      position: absolute;
-      inset: 0;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
       background: white;
+      -webkit-overflow-scrolling: touch;
     }
 
     .survey-full iframe {
-      position: absolute;
-      inset: 0;
       width: 100%;
       height: 100%;
+      min-height: 600px;
       border: 0;
-      margin: 0;
-      padding: 0;
-      display: block;
       background: white;
     }
 
-    /* MOBILE RESPONSIVENESS - FIXED */
-    @media (max-width: 800px) {
-      .container { 
-        flex-direction: column; 
-        height: 100vh; 
+    .loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #115E59;
+      font-size: 0.9rem;
+    }
+
+    /* Desktop styles */
+    @media (min-width: 768px) {
+      .drawer-tab {
+        display: none;
       }
-      
+
+      .drawer-overlay {
+        display: none;
+      }
+
       .vertical-nav { 
-        width: 100%; 
-        height: auto; 
-        flex-direction: row; 
-        overflow-x: auto; 
-        border-right: none; 
-        border-bottom: 2px solid #14B8A6; 
-      }
-      
-      .nav-header { display: none; }
-      
-      .nav-tabs { 
-        flex-direction: row; 
-        gap: 0; 
-        white-space: nowrap;
-      }
-      
-      .nav-tab { 
-        min-width: 160px; 
-        flex: 0 0 auto; 
-        border-bottom: none; 
-        border-right: 1px solid rgba(20,184,166,0.12); 
-        padding: 12px 10px;
-      }
-      
-      .nav-tab:last-child { border-right: none; }
-      
-      .dashboard { 
-        flex: 1 1 auto; 
-        height: calc(100vh - 55px);
-      }
-      
-      .tab-pane { 
-        position: relative; 
-        height: 100%;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-      
-      .iframe-container { 
         position: relative;
-        height: 100%;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-        padding: 10px;
+        left: 0;
+        width: 260px;
+        box-shadow: none;
       }
-      
-      /* MOBILE SCALING FIX */
-      .iframe-container iframe {
-        width: 100%;
-        min-height: 100%;
-        transform: scale(0.85);
-        transform-origin: top left;
-        border: 1px solid #e0e0e0;
+
+      .close-btn {
+        display: none;
+      }
+
+      .survey-full iframe {
+        min-height: 100vh;
       }
     }
 
-    /* Extra small mobile devices */
-    @media (max-width: 480px) {
-      .nav-tab { 
-        min-width: 140px; 
-        font-size: 0.82rem; 
-        padding: 10px 8px; 
-      }
-      
-      .tab-icon {
-        font-size: 1rem;
-        width: 20px;
-      }
-      
-      .iframe-container {
-        padding: 5px;
-      }
-      
-      .iframe-container iframe {
-        transform: scale(0.78);
-        transform-origin: top left;
-      }
-    }
-
-    /* Small tablets */
-    @media (min-width: 801px) and (max-width: 1024px) {
-      .vertical-nav {
-        width: 200px;
-      }
-      
-      .iframe-container iframe {
-        transform: scale(0.95);
-        transform-origin: top left;
-      }
-    }
-
-    /* Accessibility */
     .nav-tab:focus { 
       outline: 3px solid rgba(20,184,166,0.25); 
       outline-offset: -2px; 
-    }
-
-    /* Loading state */
-    .loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      font-size: 1.1rem;
-      color: #115E59;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <!-- LEFT NAV -->
-    <nav class="vertical-nav" aria-label="Main navigation">
+    <!-- Drawer Tab (mobile only) -->
+    <div class="drawer-tab" id="drawerTab">☰ MENU</div>
+
+    <!-- Overlay -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <!-- Side Navigation Drawer -->
+    <nav class="vertical-nav" id="verticalNav" aria-label="Main navigation">
       <div class="nav-header">
         <h1>💰 WealthTracker</h1>
+        <button class="close-btn" id="closeBtn" aria-label="Close menu">×</button>
       </div>
 
-      <div class="nav-tabs" role="tablist" aria-orientation="vertical">
+      <div class="nav-tabs" role="tablist">
         <button class="nav-tab active" data-tab="high-high" role="tab" aria-selected="true">
           <span class="tab-icon">📊</span>
           <span class="tab-text">High Reliability • High Transparency</span>
@@ -289,39 +315,38 @@
       </div>
     </nav>
 
-    <!-- RIGHT CONTENT -->
+    <!-- Main Dashboard Content -->
     <main class="dashboard" role="main">
       <div class="tab-content" id="tabContent">
 
-        <!-- High-High pane -->
         <section class="tab-pane active" id="high-high" role="tabpanel" aria-hidden="false">
           <div class="iframe-container" aria-hidden="false">
+            <div class="loading">Loading dashboard...</div>
             <iframe src="high reliable high transparency.html" title="High Reliability High Transparency"></iframe>
           </div>
         </section>
 
-        <!-- High-Low pane -->
         <section class="tab-pane" id="high-low" role="tabpanel" aria-hidden="true">
           <div class="iframe-container" aria-hidden="true">
+            <div class="loading">Loading dashboard...</div>
             <iframe src="high reliable low transparence.html" title="High Reliability Low Transparency"></iframe>
           </div>
         </section>
 
-        <!-- Low-High pane -->
         <section class="tab-pane" id="low-high" role="tabpanel" aria-hidden="true">
           <div class="iframe-container" aria-hidden="true">
+            <div class="loading">Loading dashboard...</div>
             <iframe src="low reliable high transparency.html" title="Low Reliability High Transparency"></iframe>
           </div>
         </section>
 
-        <!-- Low-Low pane -->
         <section class="tab-pane" id="low-low" role="tabpanel" aria-hidden="true">
           <div class="iframe-container" aria-hidden="true">
+            <div class="loading">Loading dashboard...</div>
             <iframe src="low low.html" title="Low Reliability Low Transparency"></iframe>
           </div>
         </section>
 
-        <!-- SURVEY: FULL-SCREEN INSIDE TAB -->
         <section class="tab-pane" id="survey" role="tabpanel" aria-hidden="true">
           <div class="survey-full" aria-live="polite">
             <iframe
@@ -339,53 +364,53 @@
   </div>
 
   <script>
-    // Tab switching and mobile responsiveness
     (function () {
       const tabs = Array.from(document.querySelectorAll('.nav-tab'));
       const panes = Array.from(document.querySelectorAll('.tab-pane'));
+      const drawerTab = document.getElementById('drawerTab');
+      const verticalNav = document.getElementById('verticalNav');
+      const drawerOverlay = document.getElementById('drawerOverlay');
+      const closeBtn = document.getElementById('closeBtn');
 
       function setActive(tabBtn) {
         const targetId = tabBtn.getAttribute('data-tab');
 
-        // Update tabs
         tabs.forEach(t => {
           const isActive = t === tabBtn;
           t.classList.toggle('active', isActive);
           t.setAttribute('aria-selected', isActive ? 'true' : 'false');
         });
 
-        // Update panes
         panes.forEach(p => {
           const isTarget = p.id === targetId;
           p.classList.toggle('active', isTarget);
           p.setAttribute('aria-hidden', isTarget ? 'false' : 'true');
         });
 
-        // Apply mobile scaling to iframes
-        applyMobileScaling();
-      }
-
-      // Apply scaling based on screen size
-      function applyMobileScaling() {
-        const activeIframe = document.querySelector('.tab-pane.active .iframe-container iframe');
-        if (!activeIframe) return;
-
-        const screenWidth = window.innerWidth;
-        let scale = 1;
-
-        if (screenWidth <= 480) {
-          scale = 0.78;
-        } else if (screenWidth <= 800) {
-          scale = 0.85;
-        } else if (screenWidth <= 1024) {
-          scale = 0.95;
+        // Close drawer on mobile after selection
+        if (window.innerWidth < 768) {
+          closeDrawer();
         }
-
-        activeIframe.style.transform = `scale(${scale})`;
-        activeIframe.style.transformOrigin = 'top left';
       }
 
-      // Wire up clicks + keyboard navigation
+      function openDrawer() {
+        verticalNav.classList.add('open');
+        drawerOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDrawer() {
+        verticalNav.classList.remove('open');
+        drawerOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      // Drawer controls
+      drawerTab.addEventListener('click', openDrawer);
+      closeBtn.addEventListener('click', closeDrawer);
+      drawerOverlay.addEventListener('click', closeDrawer);
+
+      // Tab switching
       tabs.forEach(tab => {
         tab.addEventListener('click', () => setActive(tab));
         tab.addEventListener('keydown', (e) => {
@@ -393,50 +418,30 @@
             e.preventDefault();
             setActive(tab);
           }
-          if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-            e.preventDefault();
-            const next = tabs[(tabs.indexOf(tab) + 1) % tabs.length];
-            next.focus();
-          }
-          if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-            e.preventDefault();
-            const prev = tabs[(tabs.indexOf(tab) - 1 + tabs.length) % tabs.length];
-            prev.focus();
-          }
         });
       });
 
-      // Set initial active state
       const initial = document.querySelector('.nav-tab.active') || tabs[0];
       if (initial) setActive(initial);
 
-      // Handle window resize
-      window.addEventListener('resize', () => {
-        applyMobileScaling();
-        
-        // Adjust iframe height on mobile
-        const activeIframe = document.querySelector('.tab-pane.active iframe');
-        if (activeIframe && window.innerWidth <= 800) {
-          activeIframe.style.height = '100%';
-        }
-      });
-
-      // Apply scaling when iframes load
-      document.querySelectorAll('iframe').forEach(iframe => {
-        iframe.addEventListener('load', function() {
-          setTimeout(applyMobileScaling, 100);
+      // Hide loading indicators after iframes load
+      const iframes = document.querySelectorAll('iframe');
+      iframes.forEach(iframe => {
+        iframe.addEventListener('load', () => {
+          const container = iframe.closest('.iframe-container, .survey-full');
+          if (container) {
+            const loading = container.querySelector('.loading');
+            if (loading) loading.style.display = 'none';
+          }
         });
       });
 
-      // Prevent body scroll when interacting with iframes
-      document.body.addEventListener('touchmove', function (e) {
-        if (e.target.tagName === 'IFRAME') {
-          e.preventDefault();
+      // Close drawer on ESC key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && verticalNav.classList.contains('open')) {
+          closeDrawer();
         }
-      }, { passive: false });
-
-      // Initial scaling application
-      setTimeout(applyMobileScaling, 500);
+      });
     })();
   </script>
 </body>
