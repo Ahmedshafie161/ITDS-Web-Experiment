@@ -13,140 +13,170 @@
         
         body { 
             font-family: 'Segoe UI', Arial, sans-serif; 
-            background: #E0F7FA;
-            color: #115E59;
+            background: #f0f9ff;
+            color: #0c4a6e;
             min-height: 100vh;
             padding: 15px;
             line-height: 1.5;
-            overflow: hidden;
         }
         
         .dashboard {
             max-width: 1100px;
-            height: 95vh;
+            min-height: 95vh;
             margin: 0 auto;
-            background: #E0F7FA;
-            border-radius: 8px;
-            border: 2px solid #115E59;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid #0ea5e9;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 8px 30px rgba(14, 165, 233, 0.15);
         }
         
         .header {
-            background: #115E59;
-            color: #E0F7FA;
-            padding: 20px;
+            background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);
+            color: white;
+            padding: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #14B8A6;
+            border-bottom: 3px solid #0ea5e9;
             flex-shrink: 0;
         }
         
         .header h1 {
-            font-size: 1.6em;
-            font-weight: 600;
+            font-size: 1.8em;
+            font-weight: 700;
         }
         
         .condition-indicator {
-            background: #2DD4BF;
-            color: #115E59;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.8em;
+            background: #22c55e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9em;
             font-weight: 600;
-            border: 1px solid #14B8A6;
+            border: 2px solid #16a34a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .condition-indicator::before {
+            content: "✓";
+            font-size: 1.1em;
         }
         
         .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 20px;
+            gap: 25px;
+            padding: 25px;
             flex: 1;
-            overflow: hidden;
         }
         
         .card {
-            background: #FFFFFF;
-            border-radius: 6px;
-            padding: 20px;
-            border: 1px solid #2DD4BF;
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 25px;
+            border: 2px solid #e2e8f0;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 2px 8px rgba(17, 94, 89, 0.1);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            border-color: #0ea5e9;
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.12);
         }
         
         .card h3 { 
-            margin-bottom: 15px; 
-            color: #115E59;
-            font-size: 1.1em;
-            font-weight: 600;
+            margin-bottom: 20px; 
+            color: #0c4a6e;
+            font-size: 1.2em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .expense-item, .investment-item {
+        .card h3::before {
+            content: "•";
+            color: #0ea5e9;
+            font-size: 1.5em;
+        }
+        
+        .data-item {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #E0F7FA;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
             align-items: center;
-            font-size: 0.9em;
+            font-size: 1em;
         }
         
-        .expense-item:last-child, .investment-item:last-child {
+        .data-item:last-child {
             border-bottom: none;
         }
         
         .positive { 
-            color: #115E59;
-            font-weight: 600;
+            color: #16a34a;
+            font-weight: 700;
         }
         
         .negative { 
-            color: #115E59;
+            color: #dc2626;
+            font-weight: 700;
+        }
+        
+        .neutral {
+            color: #0c4a6e;
             font-weight: 600;
         }
         
         .system-feedback {
-            background: #FFFFFF;
-            border: 1px solid #2DD4BF;
-            padding: 15px;
-            margin: 10px;
-            border-radius: 6px;
+            background: #f8fafc;
+            border: 2px solid #0ea5e9;
+            padding: 25px;
+            margin: 20px;
+            border-radius: 10px;
             flex-shrink: 0;
         }
         
         button {
-            background: #14B8A6;
-            color: #FFFFFF;
-            border: 1px solid #115E59;
-            padding: 12px 24px;
-            border-radius: 6px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
             cursor: pointer;
-            margin: 8px 0;
+            margin: 12px auto;
             font-weight: 700;
-            font-size: 1em;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 8px rgba(17, 94, 89, 0.3);
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
         }
         
         button:hover {
-            background: #2DD4BF;
-            color: #115E59;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(17, 94, 89, 0.4);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
         }
         
         button:active {
             transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(17, 94, 89, 0.3);
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
         }
         
         button:disabled {
-            background: #E0F7FA;
-            color: #8fa1a1;
-            border-color: #8fa1a1;
+            background: #cbd5e1;
+            color: #64748b;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
@@ -154,47 +184,63 @@
         
         .session-info {
             text-align: center;
-            padding: 12px;
-            background: #FFFFFF;
+            padding: 15px;
+            background: #f1f5f9;
             font-weight: 600;
-            border-bottom: 1px solid #E0F7FA;
-            color: #115E59;
-            border-top: 1px solid #E0F7FA;
+            border-bottom: 1px solid #e2e8f0;
+            color: #0c4a6e;
+            border-top: 1px solid #e2e8f0;
             flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .progress-container {
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            color: #475569;
         }
         
         .progress-bar {
             width: 100%;
-            height: 4px;
-            background: #E0F7FA;
-            border-radius: 2px;
-            margin: 10px 0;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
             overflow: hidden;
         }
         
         .progress-fill {
             height: 100%;
-            background: #14B8A6;
-            width: 0%;
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+            width: 78%;
+            transition: width 0.5s ease;
+            border-radius: 5px;
         }
         
         .metric-highlight {
-            background: #115E59;
-            color: #E0F7FA;
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 1px solid #14B8A6;
+            background: #0ea5e9;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.9em;
         }
 
-        /* Minimal Popup Modal Styles */
+        /* Success Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(17, 94, 89, 0.9);
+            background: rgba(12, 74, 110, 0.95);
             display: none;
             justify-content: center;
             align-items: center;
@@ -202,336 +248,626 @@
         }
 
         .modal-content {
-            background: #E0F7FA;
-            border: 2px solid #115E59;
-            border-radius: 8px;
-            padding: 25px;
-            max-width: 400px;
+            background: white;
+            border: 3px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 450px;
             width: 90%;
             text-align: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .modal-content h3 {
-            color: #115E59;
-            margin-bottom: 15px;
-            font-size: 1.3em;
+            color: #0c4a6e;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .modal-content h3.success::before {
+            content: "✓";
+            background: #22c55e;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal-content p {
-            margin-bottom: 15px;
-            line-height: 1.5;
-            font-size: 0.95em;
-            color: #115E59;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1em;
+            color: #475569;
         }
 
         .modal-buttons {
             display: flex;
-            gap: 12px;
+            gap: 15px;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
-        .retry-button {
-            background: #14B8A6;
-            color: #FFFFFF;
-            border: 1px solid #115E59;
-            padding: 10px 20px;
-            border-radius: 4px;
+        .modal-button {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            box-shadow: 0 3px 6px rgba(17, 94, 89, 0.3);
+            transition: all 0.3s ease;
+            min-width: 120px;
         }
 
-        .retry-button:hover {
-            background: #2DD4BF;
-            color: #115E59;
-            box-shadow: 0 4px 8px rgba(17, 94, 89, 0.4);
+        .modal-button:hover {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            transform: translateY(-2px);
         }
 
         .status-message {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
             text-align: center;
             font-weight: 600;
             display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .status-processing {
-            border: 1px solid #14B8A6;
-            color: #115E59;
-            background: #E0F7FA;
+            border: 2px solid #0ea5e9;
+            color: #0c4a6e;
+            background: #f0f9ff;
+        }
+
+        .status-processing::before {
+            content: "⏳";
+            font-size: 1.2em;
         }
 
         .status-success {
-            border: 1px solid #14B8A6;
-            color: #115E59;
-            background: #2DD4BF;
+            border: 2px solid #22c55e;
+            color: #166534;
+            background: #f0fdf4;
         }
 
-        .countdown-timer {
+        .status-success::before {
+            content: "✓";
+            background: #22c55e;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .details-panel {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .details-panel h4 {
+            color: #0c4a6e;
+            margin-bottom: 15px;
             font-size: 1.1em;
-            font-weight: bold;
-            color: #115E59;
-            margin: 15px 0;
-            padding: 10px;
-            border: 1px solid #14B8A6;
-            border-radius: 4px;
-            background: #E0F7FA;
         }
 
-        .countdown-number {
-            font-size: 1.3em;
-            color: #115E59;
-            font-weight: 800;
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95em;
         }
 
-        .card-content {
-            flex: 1;
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .timestamp {
+            font-size: 0.85em;
+            color: #64748b;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .reliability-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9em;
+        }
+
+        .reliability-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+
+        .step {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 10px;
+            border: 3px solid white;
+        }
+
+        .step.active .step-circle {
+            background: #0ea5e9;
+            color: white;
+        }
+
+        .step.completed .step-circle {
+            background: #22c55e;
+            color: white;
+        }
+
+        .step.completed .step-circle::before {
+            content: "✓";
+        }
+
+        .step-label {
+            font-size: 0.85em;
+            color: #64748b;
+            text-align: center;
+        }
+
+        .step.active .step-label {
+            color: #0c4a6e;
+            font-weight: 600;
+        }
+
+        .transparency-note {
+            background: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .transparency-note p {
+            margin: 0;
+            color: #0c4a6e;
+            font-size: 0.95em;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
     <div class="dashboard">
         <div class="header">
-            <h1>💰 WealthTracker</h1>
-            <div class="condition-indicator">High Reliability • Low Transparency</div>
+            <h1>💰 WealthTracker Professional</h1>
+            <div class="condition-indicator">High Reliability • High Transparency</div>
         </div>
         
         <div class="session-info">
-            Session: <span id="sessionNumber">1</span> | Status: <span id="systemStatus">Ready</span>
+            <span>Session: <strong id="sessionNumber">1</strong></span>
+            <span>Status: <strong id="systemStatus">Ready</strong></span>
+            <span class="reliability-indicator">
+                <span class="reliability-dot"></span>
+                System Reliability: 99.9%
+            </span>
         </div>
 
         <div class="main-content">
             <div class="card">
                 <h3>Portfolio Overview</h3>
-                <div class="card-content">
-                    <div>
-                        <div class="expense-item">
-                            <span>Total Assets:</span>
-                            <span class="positive">$156,842.00</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>Cash Balance:</span>
-                            <span class="positive">$23,450.00</span>
-                        </div>
-                        <div class="expense-item">
-                            <span>Monthly Growth:</span>
-                            <span class="positive">+$4,238.00</span>
-                        </div>
+                <div>
+                    <div class="data-item">
+                        <span>Total Assets:</span>
+                        <span class="neutral" id="totalAssets">$156,842.00</span>
+                    </div>
+                    <div class="data-item">
+                        <span>Cash Balance:</span>
+                        <span class="neutral" id="cashBalance">$23,450.00</span>
+                    </div>
+                    <div class="data-item">
+                        <span>Monthly Growth:</span>
+                        <span class="positive" id="monthlyGrowth">+$4,238.00</span>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Portfolio Growth Target</span>
+                        <span>78%</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 78%"></div>
+                        <div class="progress-fill" id="progressFill" style="width: 78%"></div>
                     </div>
+                </div>
+                
+                <div class="transparency-note">
+                    <p>✅ Your portfolio is performing above target. Last updated: Today, 14:30 UTC</p>
                 </div>
             </div>
 
             <div class="card">
                 <h3>Investment Allocation</h3>
-                <div class="card-content">
-                    <div>
-                        <div class="investment-item">
-                            <span>Equities:</span>
-                            <span class="positive">65%</span>
-                        </div>
-                        <div class="investment-item">
-                            <span>Fixed Income:</span>
-                            <span class="positive">25%</span>
-                        </div>
-                        <div class="investment-item">
-                            <span>Alternatives:</span>
-                            <span class="positive">10%</span>
-                        </div>
-                        <div class="investment-item">
-                            <span>Risk Level:</span>
-                            <span class="positive">Moderate</span>
-                        </div>
+                <div>
+                    <div class="data-item">
+                        <span>Equities:</span>
+                        <span class="neutral">65%</span>
+                    </div>
+                    <div class="data-item">
+                        <span>Fixed Income:</span>
+                        <span class="neutral">25%</span>
+                    </div>
+                    <div class="data-item">
+                        <span>Alternatives:</span>
+                        <span class="neutral">10%</span>
+                    </div>
+                    <div class="data-item">
+                        <span>Risk Level:</span>
+                        <span class="neutral">Moderate</span>
                     </div>
                 </div>
+                
+                <div class="transparency-note">
+                    <p>📊 Allocation optimized for moderate risk tolerance. Next review: Next Monday</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-indicator" id="stepIndicator">
+            <div class="step active" id="step1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Initiate</div>
+            </div>
+            <div class="step" id="step2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Validate</div>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Process</div>
+            </div>
+            <div class="step" id="step4">
+                <div class="step-circle">4</div>
+                <div class="step-label">Complete</div>
             </div>
         </div>
 
         <div class="system-feedback">
             <div style="margin-top: 12px;">
-                <button onclick="executeRebalance()" id="actionButton">Execute Rebalance</button>
+                <button onclick="executeRebalance()" id="actionButton">
+                    <span>Execute Portfolio Rebalance</span>
+                    <span>⏵</span>
+                </button>
             </div>
-            <div id="attemptCounter" style="margin-top: 10px; font-size: 0.85em; color: #115E59;"></div>
+            
+            <div id="attemptCounter" style="margin-top: 15px; font-size: 0.9em; color: #475569; text-align: center;">
+                Ready to execute. This process typically takes 3-5 seconds.
+            </div>
+            
+            <div class="transparency-note" id="transparencyDetails" style="display: none;">
+                <p><strong>Process Details:</strong> Rebalancing will adjust your portfolio to maintain target allocations. No market orders will be placed without confirmation.</p>
+            </div>
+            
+            <button onclick="toggleDetails()" id="detailsButton" style="background: #f1f5f9; color: #475569; box-shadow: none; margin-top: 15px; font-size: 0.9em; padding: 10px 20px;">
+                Show Process Details
+            </button>
         </div>
 
         <div id="processingMessage" class="status-message status-processing">
-            Processing...
+            Processing your portfolio rebalance...
         </div>
 
         <div id="successMessage" class="status-message status-success">
-            Complete
+            Portfolio rebalance completed successfully!
+        </div>
+
+        <div class="details-panel" id="detailsPanel">
+            <h4>Transaction Details</h4>
+            <div class="detail-item">
+                <span>Transaction ID:</span>
+                <span id="transactionId">TX-2024-001234</span>
+            </div>
+            <div class="detail-item">
+                <span>Initiated:</span>
+                <span id="initiatedTime">--:--:--</span>
+            </div>
+            <div class="detail-item">
+                <span>Completed:</span>
+                <span id="completedTime">--:--:--</span>
+            </div>
+            <div class="detail-item">
+                <span>Duration:</span>
+                <span id="duration">--s</span>
+            </div>
+            <div class="detail-item">
+                <span>Status:</span>
+                <span class="positive" id="detailedStatus">Pending</span>
+            </div>
+            <div class="timestamp" id="lastUpdate">
+                Last updated: --
+            </div>
         </div>
     </div>
 
-    <!-- Minimal Error Popup Modal -->
-    <div id="errorModal" class="modal-overlay">
+    <!-- Success Modal -->
+    <div id="successModal" class="modal-overlay">
         <div class="modal-content">
-            <h3>Processing Error</h3>
-            <p>Transaction could not be completed.</p>
-            <p>Retrying automatically.</p>
-            
-            <div class="countdown-timer">
-                Retry in <span id="countdownNumber" class="countdown-number">10</span>s
-            </div>
-            
+            <h3 class="success">Transaction Successful!</h3>
+            <p>Your portfolio has been successfully rebalanced.</p>
+            <p><strong>New allocations:</strong><br>
+            Equities: 65% → 64%<br>
+            Fixed Income: 25% → 26%<br>
+            Alternatives: 10% (unchanged)</p>
             <div class="modal-buttons">
-                <button class="retry-button" onclick="retryTransaction()">Retry</button>
-                <button class="retry-button" onclick="cancelAutoRetry()" style="background: #E0F7FA; color: #115E59; border-color: #115E59;">Cancel</button>
+                <button class="modal-button" onclick="closeSuccessModal()">View Details</button>
+                <button class="modal-button" onclick="closeSuccessModal()" style="background: #f1f5f9; color: #475569; border: 2px solid #e2e8f0;">Done</button>
             </div>
         </div>
     </div>
 
     <script>
-        let attempts = 0;
         let transactionInProgress = false;
-        let countdownTimer;
-        let countdownValue = 10;
+        let transactionStartTime = null;
+        let currentStep = 1;
         
-        function updateAttemptDisplay() {
-            const counter = document.getElementById('attemptCounter');
-            if (attempts === 0) {
-                counter.textContent = '';
-            } else if (attempts === 1) {
-                counter.textContent = 'Previous attempt failed';
-            } else {
-                counter.textContent = 'Completed';
-            }
+        function updateStepIndicator(step) {
+            // Reset all steps
+            document.querySelectorAll('.step').forEach((stepEl, index) => {
+                stepEl.classList.remove('active', 'completed');
+                if (index + 1 < step) {
+                    stepEl.classList.add('completed');
+                } else if (index + 1 === step) {
+                    stepEl.classList.add('active');
+                }
+            });
         }
 
         function executeRebalance() {
             if (transactionInProgress) return;
             
-            attempts++;
             transactionInProgress = true;
-            updateAttemptDisplay();
+            transactionStartTime = new Date();
+            currentStep = 1;
             
             const actionButton = document.getElementById('actionButton');
             const processingMessage = document.getElementById('processingMessage');
             const systemStatus = document.getElementById('systemStatus');
+            const attemptCounter = document.getElementById('attemptCounter');
+            const detailsPanel = document.getElementById('detailsPanel');
             
-            // Disable button during processing
+            // Show details panel
+            detailsPanel.style.display = 'block';
+            
+            // Update transaction details
+            document.getElementById('initiatedTime').textContent = transactionStartTime.toLocaleTimeString();
+            document.getElementById('detailedStatus').textContent = 'Processing';
+            document.getElementById('detailedStatus').className = 'positive';
+            document.getElementById('lastUpdate').textContent = `Last updated: ${transactionStartTime.toLocaleTimeString()}`;
+            
+            // Disable button and update UI
             actionButton.disabled = true;
-            actionButton.textContent = 'Processing...';
+            actionButton.innerHTML = '<span>Processing...</span><span>⏳</span>';
             systemStatus.textContent = 'Processing';
-            systemStatus.style.color = '#14B8A6';
+            systemStatus.style.color = '#0ea5e9';
+            attemptCounter.textContent = 'Step 1/4: Initiating transaction...';
+            attemptCounter.style.color = '#0ea5e9';
             
             // Show processing message
-            processingMessage.style.display = 'block';
+            processingMessage.style.display = 'flex';
             
-            if (attempts === 1) {
-                // FIRST ATTEMPT: Simulate failure after 2 seconds
-                setTimeout(() => {
-                    processingMessage.style.display = 'none';
-                    actionButton.disabled = false;
-                    actionButton.textContent = 'Execute Rebalance';
-                    systemStatus.textContent = 'Error';
-                    systemStatus.style.color = '#115E59';
-                    transactionInProgress = false;
-                    
-                    // Show minimal error popup
-                    showErrorModalWithCountdown();
-                }, 2000);
-            } else {
-                // SECOND ATTEMPT: Simulate success
-                simulateSuccessfulTransaction();
-            }
+            // Update step indicator
+            updateStepIndicator(1);
+            
+            // Start the multi-step process
+            processStep1();
         }
 
-        function showErrorModalWithCountdown() {
-            countdownValue = 10;
-            document.getElementById('countdownNumber').textContent = countdownValue;
-            document.getElementById('errorModal').style.display = 'flex';
-            
-            // Start countdown timer
-            countdownTimer = setInterval(() => {
-                countdownValue--;
-                document.getElementById('countdownNumber').textContent = countdownValue;
+        function processStep1() {
+            // Step 1: Initiate
+            setTimeout(() => {
+                currentStep = 2;
+                updateStepIndicator(2);
                 
-                if (countdownValue <= 0) {
-                    clearInterval(countdownTimer);
-                    retryTransaction();
-                }
+                const attemptCounter = document.getElementById('attemptCounter');
+                attemptCounter.textContent = 'Step 2/4: Validating portfolio data...';
+                
+                // Update transaction details
+                const updateTime = new Date();
+                document.getElementById('lastUpdate').textContent = `Last updated: ${updateTime.toLocaleTimeString()}`;
+                
+                processStep2();
             }, 1000);
         }
 
-        function retryTransaction() {
-            clearInterval(countdownTimer);
-            closeModal();
-            executeRebalance();
-        }
-
-        function cancelAutoRetry() {
-            clearInterval(countdownTimer);
-            closeModal();
-            
-            // Reset button state
-            const actionButton = document.getElementById('actionButton');
-            const systemStatus = document.getElementById('systemStatus');
-            
-            actionButton.disabled = false;
-            actionButton.textContent = 'Execute Rebalance';
-            systemStatus.textContent = 'Ready';
-            systemStatus.style.color = '#14B8A6';
-            
-            transactionInProgress = false;
-        }
-
-        function closeModal() {
-            document.getElementById('errorModal').style.display = 'none';
-        }
-
-        function simulateSuccessfulTransaction() {
-            const actionButton = document.getElementById('actionButton');
-            const processingMessage = document.getElementById('processingMessage');
-            const successMessage = document.getElementById('successMessage');
-            const systemStatus = document.getElementById('systemStatus');
-            const progressBar = document.querySelector('.progress-fill');
-            
-            // Simulate processing with progress bar
-            let progress = 0;
-            const progressInterval = setInterval(() => {
-                progress += 2;
-                progressBar.style.width = `${progress}%`;
+        function processStep2() {
+            // Step 2: Validate
+            setTimeout(() => {
+                currentStep = 3;
+                updateStepIndicator(3);
                 
-                if (progress >= 100) {
-                    clearInterval(progressInterval);
-                    
-                    // Complete the transaction
-                    setTimeout(() => {
-                        processingMessage.style.display = 'none';
-                        successMessage.style.display = 'block';
-                        
-                        // Update system status
-                        systemStatus.textContent = 'Complete';
-                        systemStatus.style.color = '#14B8A6';
-                        
-                        // Update button state
-                        actionButton.textContent = 'Complete';
-                        actionButton.style.background = '#2DD4BF';
-                        actionButton.style.color = '#115E59';
-                        actionButton.style.borderColor = '#115E59';
-                        
-                        transactionInProgress = false;
-                    }, 500);
-                }
-            }, 30);
+                const attemptCounter = document.getElementById('attemptCounter');
+                attemptCounter.textContent = 'Step 3/4: Calculating adjustments...';
+                
+                // Update transaction details
+                const updateTime = new Date();
+                document.getElementById('lastUpdate').textContent = `Last updated: ${updateTime.toLocaleTimeString()}`;
+                
+                processStep3();
+            }, 1200);
         }
 
-        // Initialize display
-        updateAttemptDisplay();
+        function processStep3() {
+            // Step 3: Process
+            setTimeout(() => {
+                currentStep = 4;
+                updateStepIndicator(4);
+                
+                const attemptCounter = document.getElementById('attemptCounter');
+                attemptCounter.textContent = 'Step 4/4: Finalizing transaction...';
+                
+                // Update progress bar
+                const progressFill = document.getElementById('progressFill');
+                progressFill.style.width = '85%';
+                progressFill.style.background = 'linear-gradient(90deg, #22c55e 0%, #16a34a 100%)';
+                
+                // Update transaction details
+                const updateTime = new Date();
+                document.getElementById('lastUpdate').textContent = `Last updated: ${updateTime.toLocaleTimeString()}`;
+                
+                processStep4();
+            }, 1500);
+        }
+
+        function processStep4() {
+            // Step 4: Complete
+            setTimeout(() => {
+                const actionButton = document.getElementById('actionButton');
+                const processingMessage = document.getElementById('processingMessage');
+                const successMessage = document.getElementById('successMessage');
+                const systemStatus = document.getElementById('systemStatus');
+                const attemptCounter = document.getElementById('attemptCounter');
+                
+                // Complete the transaction
+                processingMessage.style.display = 'none';
+                successMessage.style.display = 'flex';
+                
+                // Update system status
+                systemStatus.textContent = 'Complete';
+                systemStatus.style.color = '#22c55e';
+                
+                // Update button state
+                actionButton.disabled = false;
+                actionButton.innerHTML = '<span>Complete ✓</span>';
+                actionButton.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
+                
+                // Update counter
+                attemptCounter.textContent = 'Transaction completed successfully in 3.7 seconds';
+                attemptCounter.style.color = '#16a34a';
+                
+                // Update transaction details
+                const completionTime = new Date();
+                const duration = (completionTime - transactionStartTime) / 1000;
+                
+                document.getElementById('completedTime').textContent = completionTime.toLocaleTimeString();
+                document.getElementById('duration').textContent = `${duration.toFixed(1)}s`;
+                document.getElementById('detailedStatus').textContent = 'Completed Successfully';
+                document.getElementById('detailedStatus').className = 'positive';
+                document.getElementById('lastUpdate').textContent = `Last updated: ${completionTime.toLocaleTimeString()}`;
+                
+                // Update portfolio numbers (simulate small changes)
+                document.getElementById('totalAssets').textContent = '$157,128.50';
+                document.getElementById('cashBalance').textContent = '$23,215.75';
+                document.getElementById('monthlyGrowth').textContent = '+$4,525.25';
+                
+                transactionInProgress = false;
+                
+                // Show success modal after a brief delay
+                setTimeout(() => {
+                    showSuccessModal();
+                }, 500);
+            }, 1000);
+        }
+
+        function showSuccessModal() {
+            document.getElementById('successModal').style.display = 'flex';
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        function toggleDetails() {
+            const detailsPanel = document.getElementById('detailsPanel');
+            const transparencyDetails = document.getElementById('transparencyDetails');
+            const detailsButton = document.getElementById('detailsButton');
+            
+            if (detailsPanel.style.display === 'block') {
+                detailsPanel.style.display = 'none';
+                transparencyDetails.style.display = 'none';
+                detailsButton.innerHTML = 'Show Process Details';
+            } else {
+                detailsPanel.style.display = 'block';
+                transparencyDetails.style.display = 'block';
+                detailsButton.innerHTML = 'Hide Process Details';
+            }
+        }
+
+        // Initialize the dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStepIndicator(1);
+            
+            // Generate a random transaction ID
+            const transactionId = 'TX-' + new Date().getFullYear() + '-' + 
+                String(Math.floor(Math.random() * 1000000)).padStart(6, '0');
+            document.getElementById('transactionId').textContent = transactionId;
+            
+            // Update timestamp
+            const now = new Date();
+            document.getElementById('lastUpdate').textContent = `Last updated: ${now.toLocaleTimeString()}`;
+        });
         
         // Close modal if clicked outside
         window.onclick = function(event) {
-            const modal = document.getElementById('errorModal');
+            const modal = document.getElementById('successModal');
             if (event.target === modal) {
-                cancelAutoRetry();
+                closeSuccessModal();
             }
         }
     </script>
