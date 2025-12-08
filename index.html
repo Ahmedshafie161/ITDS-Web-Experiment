@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WealthTracker - Dashboard Variants</title>
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow: hidden; }
+    html, body { height: 100%; }
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
       background: #E0F7FA;
@@ -15,12 +15,12 @@
       line-height: 1.5;
     }
 
+    /* Layout */
     .container {
       display: flex;
       flex-direction: column;
-      height: 100vh;
+      min-height: 100vh;
       width: 100%;
-      overflow: hidden;
     }
 
     .vertical-nav {
@@ -31,18 +31,15 @@
       width: 100%;
       flex-shrink: 0;
       border-bottom: 2px solid #14B8A6;
-      overflow-y: auto;
-      max-height: 40vh;
     }
 
     .nav-header { 
-      padding: 15px; 
+      padding: 18px; 
       border-bottom: 2px solid #14B8A6; 
-      text-align: center;
-      flex-shrink: 0;
+      text-align: center; 
     }
     .nav-header h1 { 
-      font-size: 1.1rem; 
+      font-size: 1.2rem; 
       font-weight: 600; 
     }
 
@@ -53,10 +50,10 @@
     }
 
     .nav-tab {
-      padding: 14px 12px;
+      padding: 16px 12px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       cursor: pointer;
       border: none;
       background: none;
@@ -65,33 +62,30 @@
       font-weight: 700;
       border-bottom: 1px solid rgba(20,184,166,0.12);
       width: 100%;
-      font-size: 0.85rem;
-      flex-shrink: 0;
+      font-size: 0.95rem;
     }
 
     .nav-tab:hover { background: rgba(255,255,255,0.03); color: #2DD4BF; }
     .nav-tab.active { background: #14B8A6; color: white; }
 
-    .tab-icon { font-size: 1rem; width: 24px; flex-shrink: 0; }
+    .tab-icon { font-size: 1.1rem; width: 26px; flex-shrink: 0; }
     .tab-text { flex: 1; }
 
+    /* Dashboard content */
     .dashboard {
       flex: 1;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      overflow: auto;
       background: white;
       position: relative;
       width: 100%;
-      min-height: 0;
     }
 
     .tab-content {
       width: 100%;
       height: 100%;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      overflow: auto;
     }
 
     .tab-pane {
@@ -99,31 +93,31 @@
       width: 100%;
       height: 100%;
       overflow: auto;
-      -webkit-overflow-scrolling: touch;
+      background: #ffffff;
     }
 
     .tab-pane.active {
-      display: flex;
-      flex-direction: column;
+      display: block;
     }
 
+    /* Iframe container */
     .iframe-container {
       width: 100%;
       height: 100%;
       overflow: auto;
       background: white;
       -webkit-overflow-scrolling: touch;
-      position: relative;
     }
 
     .iframe-container iframe {
       width: 100%;
-      height: 100%;
+      min-height: 100vh;
       border: 0;
       display: block;
       background: #fff;
     }
 
+    /* Survey styling */
     .survey-full {
       width: 100%;
       height: 100%;
@@ -134,68 +128,53 @@
 
     .survey-full iframe {
       width: 100%;
-      height: 100%;
-      min-height: 600px;
+      min-height: 100vh;
       border: 0;
       background: white;
     }
 
-    /* Desktop styles */
+    /* MOBILE RESPONSIVENESS */
     @media (min-width: 768px) {
       .container { 
-        flex-direction: row;
+        flex-direction: row; 
+        height: 100vh;
       }
       
       .vertical-nav { 
-        width: 260px; 
+        width: 240px; 
         height: 100vh;
-        max-height: none;
         border-right: 2px solid #14B8A6;
         border-bottom: none;
-      }
-
-      .nav-header h1 {
-        font-size: 1.2rem;
+        overflow-y: auto;
       }
       
-      .nav-tab {
-        padding: 16px 12px;
-        font-size: 0.95rem;
+      .nav-tabs { 
+        flex-direction: column; 
       }
-
-      .tab-icon {
-        font-size: 1.1rem;
-        width: 26px;
+      
+      .nav-tab { 
+        min-width: auto;
+        border-bottom: 1px solid rgba(20,184,166,0.12);
+        border-right: none;
       }
       
       .dashboard { 
+        flex: 1;
         height: 100vh;
-      }
-
-      .survey-full iframe {
-        min-height: 100vh;
       }
     }
 
+    /* Accessibility */
     .nav-tab:focus { 
       outline: 3px solid rgba(20,184,166,0.25); 
       outline-offset: -2px; 
-    }
-
-    /* Loading indicator */
-    .loading {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #115E59;
-      font-size: 0.9rem;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
+    <!-- LEFT NAV -->
     <nav class="vertical-nav" aria-label="Main navigation">
       <div class="nav-header">
         <h1>💰 WealthTracker</h1>
@@ -229,37 +208,39 @@
       </div>
     </nav>
 
+    <!-- RIGHT CONTENT -->
     <main class="dashboard" role="main">
       <div class="tab-content" id="tabContent">
 
+        <!-- High-High pane -->
         <section class="tab-pane active" id="high-high" role="tabpanel" aria-hidden="false">
           <div class="iframe-container" aria-hidden="false">
-            <div class="loading">Loading dashboard...</div>
             <iframe src="high reliable high transparency.html" title="High Reliability High Transparency"></iframe>
           </div>
         </section>
 
+        <!-- High-Low pane -->
         <section class="tab-pane" id="high-low" role="tabpanel" aria-hidden="true">
           <div class="iframe-container" aria-hidden="true">
-            <div class="loading">Loading dashboard...</div>
             <iframe src="high reliable low transparence.html" title="High Reliability Low Transparency"></iframe>
           </div>
         </section>
 
+        <!-- Low-High pane -->
         <section class="tab-pane" id="low-high" role="tabpanel" aria-hidden="true">
           <div class="iframe-container" aria-hidden="true">
-            <div class="loading">Loading dashboard...</div>
             <iframe src="low reliable high transparency.html" title="Low Reliability High Transparency"></iframe>
           </div>
         </section>
 
+        <!-- Low-Low pane -->
         <section class="tab-pane" id="low-low" role="tabpanel" aria-hidden="true">
           <div class="iframe-container" aria-hidden="true">
-            <div class="loading">Loading dashboard...</div>
             <iframe src="low low.html" title="Low Reliability Low Transparency"></iframe>
           </div>
         </section>
 
+        <!-- SURVEY: FULL-SCREEN INSIDE TAB -->
         <section class="tab-pane" id="survey" role="tabpanel" aria-hidden="true">
           <div class="survey-full" aria-live="polite">
             <iframe
@@ -277,6 +258,7 @@
   </div>
 
   <script>
+    // Tab switching
     (function () {
       const tabs = Array.from(document.querySelectorAll('.nav-tab'));
       const panes = Array.from(document.querySelectorAll('.tab-pane'));
@@ -284,12 +266,14 @@
       function setActive(tabBtn) {
         const targetId = tabBtn.getAttribute('data-tab');
 
+        // Update tabs
         tabs.forEach(t => {
           const isActive = t === tabBtn;
           t.classList.toggle('active', isActive);
           t.setAttribute('aria-selected', isActive ? 'true' : 'false');
         });
 
+        // Update panes
         panes.forEach(p => {
           const isTarget = p.id === targetId;
           p.classList.toggle('active', isTarget);
@@ -297,6 +281,7 @@
         });
       }
 
+      // Wire up clicks + keyboard navigation
       tabs.forEach(tab => {
         tab.addEventListener('click', () => setActive(tab));
         tab.addEventListener('keydown', (e) => {
@@ -307,20 +292,9 @@
         });
       });
 
+      // Set initial active state
       const initial = document.querySelector('.nav-tab.active') || tabs[0];
       if (initial) setActive(initial);
-
-      // Hide loading indicators after iframes load
-      const iframes = document.querySelectorAll('iframe');
-      iframes.forEach(iframe => {
-        iframe.addEventListener('load', () => {
-          const container = iframe.closest('.iframe-container, .survey-full');
-          if (container) {
-            const loading = container.querySelector('.loading');
-            if (loading) loading.style.display = 'none';
-          }
-        });
-      });
     })();
   </script>
 </body>
