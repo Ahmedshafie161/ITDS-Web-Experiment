@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WealthTracker - Financial Dashboard</title>
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background: #E0F7FA;
+            color: #115E59;
+            min-height: 100vh;
+            padding: 15px;
+            line-height: 1.5;
+            overflow: hidden;
+        }
+        
+        .dashboard {
+            max-width: 1100px;
+            height: 95vh;
+            margin: 0 auto;
+            background: #E0F7FA;
+            border-radius: 8px;
+            border: 2px solid #115E59;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: #115E59;
+            color: #E0F7FA;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #14B8A6;
+            flex-shrink: 0;
+        }
+        
+        .header h1 {
+            font-size: 1.6em;
+            font-weight: 600;
+        }
+        
+        .condition-indicator {
+            background: #2DD4BF;
+            color: #115E59;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            font-weight: 600;
+            border: 1px solid #14B8A6;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 20px;
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        .card {
+            background: #FFFFFF;
+            border-radius: 6px;
+            padding: 20px;
+            border: 1px solid #2DD4BF;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 8px rgba(17, 94, 89, 0.1);
+        }
+        
+        .card h3 { 
+            margin-bottom: 15px; 
+            color: #115E59;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .expense-item, .investment-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #E0F7FA;
+            align-items: center;
+            font-size: 0.9em;
+        }
+        
+        .expense-item:last-child, .investment-item:last-child {
+            border-bottom: none;
+        }
+        
+        .positive { 
+            color: #115E59;
+            font-weight: 600;
+        }
+        
+        .negative { 
+            color: #115E59;
+            font-weight: 600;
+        }
+        
+        .system-feedback {
+            background: #FFFFFF;
+            border: 1px solid #2DD4BF;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+        
+        button {
+            background: #14B8A6;
+            color: #FFFFFF;
+            border: 1px solid #115E59;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 8px 0;
+            font-weight: 700;
+            font-size: 1em;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 8px rgba(17, 94, 89, 0.3);
+        }
+        
+        button:hover {
+            background: #2DD4BF;
+            color: #115E59;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(17, 94, 89, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(17, 94, 89, 0.3);
+        }
+        
+        button:disabled {
+            background: #E0F7FA;
+            color: #8fa1a1;
+            border-color: #8fa1a1;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .session-info {
+            text-align: center;
+            padding: 12px;
+            background: #FFFFFF;
+            font-weight: 600;
+            border-bottom: 1px solid #E0F7FA;
+            color: #115E59;
+            border-top: 1px solid #E0F7FA;
+            flex-shrink: 0;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #E0F7FA;
+            border-radius: 2px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #14B8A6;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .metric-highlight {
+            background: #115E59;
+            color: #E0F7FA;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #14B8A6;
+        }
+
+        /* Minimal Popup Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(17, 94, 89, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #E0F7FA;
+            border: 2px solid #115E59;
+            border-radius: 8px;
+            padding: 25px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            color: #115E59;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .modal-content p {
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-size: 0.95em;
+            color: #115E59;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .retry-button {
+            background: #14B8A6;
+            color: #FFFFFF;
+            border: 1px solid #115E59;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 3px 6px rgba(17, 94, 89, 0.3);
+        }
+
+        .retry-button:hover {
+            background: #2DD4BF;
+            color: #115E59;
+            box-shadow: 0 4px 8px rgba(17, 94, 89, 0.4);
+        }
+
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .status-processing {
+            border: 1px solid #14B8A6;
+            color: #115E59;
+            background: #E0F7FA;
+        }
+
+        .status-success {
+            border: 1px solid #14B8A6;
+            color: #115E59;
+            background: #2DD4BF;
+        }
+
+        .countdown-timer {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #115E59;
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #14B8A6;
+            border-radius: 4px;
+            background: #E0F7FA;
+        }
+
+        .countdown-number {
+            font-size: 1.3em;
+            color: #115E59;
+            font-weight: 800;
+        }
+
+        .card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>💰 WealthTracker</h1>
+            <div class="condition-indicator">High Reliability • Low Transparency</div>
+        </div>
+        
+        <div class="session-info">
+            Session: <span id="sessionNumber">1</span> | Status: <span id="systemStatus">Ready</span>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h3>Portfolio Overview</h3>
+                <div class="card-content">
+                    <div>
+                        <div class="expense-item">
+                            <span>Total Assets:</span>
+                            <span class="positive">$156,842.00</span>
+                        </div>
+                        <div class="expense-item">
+                            <span>Cash Balance:</span>
+                            <span class="positive">$23,450.00</span>
+                        </div>
+                        <div class="expense-item">
+                            <span>Monthly Growth:</span>
+                            <span class="positive">+$4,238.00</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Investment Allocation</h3>
+                <div class="card-content">
+                    <div>
+                        <div class="investment-item">
+                            <span>Equities:</span>
+                            <span class="positive">65%</span>
+                        </div>
+                        <div class="investment-item">
+                            <span>Fixed Income:</span>
+                            <span class="positive">25%</span>
+                        </div>
+                        <div class="investment-item">
+                            <span>Alternatives:</span>
+                            <span class="positive">10%</span>
+                        </div>
+                        <div class="investment-item">
+                            <span>Risk Level:</span>
+                            <span class="positive">Moderate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="system-feedback">
+            <div style="margin-top: 12px;">
+                <button onclick="executeRebalance()" id="actionButton">Execute Rebalance</button>
+            </div>
+            <div id="attemptCounter" style="margin-top: 10px; font-size: 0.85em; color: #115E59;"></div>
+        </div>
+
+        <div id="processingMessage" class="status-message status-processing">
+            Processing...
+        </div>
+
+        <div id="successMessage" class="status-message status-success">
+            Complete
+        </div>
+    </div>
+
+    <!-- Minimal Error Popup Modal -->
+    <div id="errorModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Processing Error</h3>
+            <p>Transaction could not be completed.</p>
+            <p>Retrying automatically.</p>
+            
+            <div class="countdown-timer">
+                Retry in <span id="countdownNumber" class="countdown-number">10</span>s
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="retry-button" onclick="retryTransaction()">Retry</button>
+                <button class="retry-button" onclick="cancelAutoRetry()" style="background: #E0F7FA; color: #115E59; border-color: #115E59;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let attempts = 0;
+        let transactionInProgress = false;
+        let countdownTimer;
+        let countdownValue = 10;
+        
+        function updateAttemptDisplay() {
+            const counter = document.getElementById('attemptCounter');
+            if (attempts === 0) {
+                counter.textContent = '';
+            } else if (attempts === 1) {
+                counter.textContent = 'Previous attempt failed';
+            } else {
+                counter.textContent = 'Completed';
+            }
+        }
+
+        function executeRebalance() {
+            if (transactionInProgress) return;
+            
+            attempts++;
+            transactionInProgress = true;
+            updateAttemptDisplay();
+            
+            const actionButton = document.getElementById('actionButton');
+            const processingMessage = document.getElementById('processingMessage');
+            const systemStatus = document.getElementById('systemStatus');
+            
+            // Disable button during processing
+            actionButton.disabled = true;
+            actionButton.textContent = 'Processing...';
+            systemStatus.textContent = 'Processing';
+            systemStatus.style.color = '#14B8A6';
+            
+            // Show processing message
+            processingMessage.style.display = 'block';
+            
+            if (attempts === 1) {
+                // FIRST ATTEMPT: Simulate failure after 2 seconds
+                setTimeout(() => {
+                    processingMessage.style.display = 'none';
+                    actionButton.disabled = false;
+                    actionButton.textContent = 'Execute Rebalance';
+                    systemStatus.textContent = 'Error';
+                    systemStatus.style.color = '#115E59';
+                    transactionInProgress = false;
+                    
+                    // Show minimal error popup
+                    showErrorModalWithCountdown();
+                }, 2000);
+            } else {
+                // SECOND ATTEMPT: Simulate success
+                simulateSuccessfulTransaction();
+            }
+        }
+
+        function showErrorModalWithCountdown() {
+            countdownValue = 10;
+            document.getElementById('countdownNumber').textContent = countdownValue;
+            document.getElementById('errorModal').style.display = 'flex';
+            
+            // Start countdown timer
+            countdownTimer = setInterval(() => {
+                countdownValue--;
+                document.getElementById('countdownNumber').textContent = countdownValue;
+                
+                if (countdownValue <= 0) {
+                    clearInterval(countdownTimer);
+                    retryTransaction();
+                }
+            }, 1000);
+        }
+
+        function retryTransaction() {
+            clearInterval(countdownTimer);
+            closeModal();
+            executeRebalance();
+        }
+
+        function cancelAutoRetry() {
+            clearInterval(countdownTimer);
+            closeModal();
+            
+            // Reset button state
+            const actionButton = document.getElementById('actionButton');
+            const systemStatus = document.getElementById('systemStatus');
+            
+            actionButton.disabled = false;
+            actionButton.textContent = 'Execute Rebalance';
+            systemStatus.textContent = 'Ready';
+            systemStatus.style.color = '#14B8A6';
+            
+            transactionInProgress = false;
+        }
+
+        function closeModal() {
+            document.getElementById('errorModal').style.display = 'none';
+        }
+
+        function simulateSuccessfulTransaction() {
+            const actionButton = document.getElementById('actionButton');
+            const processingMessage = document.getElementById('processingMessage');
+            const successMessage = document.getElementById('successMessage');
+            const systemStatus = document.getElementById('systemStatus');
+            const progressBar = document.querySelector('.progress-fill');
+            
+            // Simulate processing with progress bar
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 2;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    
+                    // Complete the transaction
+                    setTimeout(() => {
+                        processingMessage.style.display = 'none';
+                        successMessage.style.display = 'block';
+                        
+                        // Update system status
+                        systemStatus.textContent = 'Complete';
+                        systemStatus.style.color = '#14B8A6';
+                        
+                        // Update button state
+                        actionButton.textContent = 'Complete';
+                        actionButton.style.background = '#2DD4BF';
+                        actionButton.style.color = '#115E59';
+                        actionButton.style.borderColor = '#115E59';
+                        
+                        transactionInProgress = false;
+                    }, 500);
+                }
+            }, 30);
+        }
+
+        // Initialize display
+        updateAttemptDisplay();
+        
+        // Close modal if clicked outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('errorModal');
+            if (event.target === modal) {
+                cancelAutoRetry();
+            }
+        }
+    </script>
+</body>
+</html>
