@@ -15,29 +15,25 @@
             font-family: 'Segoe UI', Arial, sans-serif; 
             background: #E0F7FA;
             color: #115E59;
-            min-height: 100vh;
-            padding: 15px;
             line-height: 1.5;
-            overflow: hidden;
+            padding: 10px;
+            min-height: 100vh;
         }
         
         .dashboard {
             max-width: 1100px;
-            height: 95vh;
             margin: 0 auto;
             background: #E0F7FA;
             border-radius: 8px;
             border: 2px solid #115E59;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
-            position: relative;
         }
         
         .header {
             background: #115E59;
             color: #E0F7FA;
-            padding: 20px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -46,33 +42,38 @@
         }
         
         .header h1 {
-            font-size: 1.6em;
+            font-size: 1.4em;
             font-weight: 600;
         }
         
         .condition-indicator {
             background: #2DD4BF;
             color: #115E59;
-            padding: 6px 12px;
+            padding: 6px 10px;
             border-radius: 6px;
-            font-size: 0.8em;
+            font-size: 0.75em;
             font-weight: 600;
             border: 1px solid #14B8A6;
         }
         
         .main-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 15px;
-            padding: 20px;
+            padding: 15px;
             flex: 1;
-            overflow: hidden;
+        }
+        
+        @media (min-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+            }
         }
         
         .card {
             background: #FFFFFF;
             border-radius: 6px;
-            padding: 20px;
+            padding: 15px;
             border: 1px solid #2DD4BF;
             display: flex;
             flex-direction: column;
@@ -87,7 +88,7 @@
         }
         
         .card h3 { 
-            margin-bottom: 15px; 
+            margin-bottom: 12px; 
             color: #115E59;
             font-size: 1.1em;
             font-weight: 600;
@@ -137,6 +138,13 @@
             font-size: 1em;
             transition: all 0.2s ease;
             box-shadow: 0 4px 8px rgba(17, 94, 89, 0.3);
+            width: 100%;
+        }
+        
+        @media (min-width: 480px) {
+            button {
+                width: auto;
+            }
         }
         
         button:hover {
@@ -195,66 +203,69 @@
             border: 1px solid #14B8A6;
         }
 
-        /* Annoying Popup Styles */
+        /* Popup Styles */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(17, 94, 89, 0.9);
+            background: rgba(17, 94, 89, 0.95);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            padding: 20px;
         }
 
         .modal-content {
             background: #E0F7FA;
             border: 2px solid #115E59;
             border-radius: 8px;
-            padding: 25px;
+            padding: 20px;
+            width: 100%;
             max-width: 400px;
-            width: 90%;
             text-align: center;
-            animation: shake 0.5s ease-in-out;
         }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         .modal-content h3 {
             color: #115E59;
             margin-bottom: 15px;
-            font-size: 1.3em;
+            font-size: 1.2em;
         }
 
         .modal-content p {
             margin-bottom: 15px;
             line-height: 1.5;
-            font-size: 0.95em;
+            font-size: 0.9em;
             color: #115E59;
         }
 
         .modal-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .retry-button {
             background: #14B8A6;
             color: #FFFFFF;
             border: 1px solid #115E59;
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
             box-shadow: 0 3px 6px rgba(17, 94, 89, 0.3);
+            flex: 1;
+            min-width: 120px;
         }
 
         .retry-button:hover {
@@ -284,14 +295,10 @@
             background: #2DD4BF;
         }
 
-        .slow-button {
-            opacity: 0.7;
-            cursor: wait !important;
-        }
-
         .annoying-popup {
             position: fixed;
             bottom: 20px;
+            left: 20px;
             right: 20px;
             background: #FF6B6B;
             color: white;
@@ -300,45 +307,32 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             z-index: 999;
             display: none;
-            animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.02); }
             100% { transform: scale(1); }
-        }
-
-        .glitch {
-            animation: glitch 0.3s linear infinite;
         }
 
         @keyframes glitch {
             0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(-1px, -1px); }
+            60% { transform: translate(1px, 1px); }
+            80% { transform: translate(1px, -1px); }
             100% { transform: translate(0); }
-        }
-
-        .blinking {
-            animation: blink 1s linear infinite;
         }
 
         @keyframes blink {
             0% { opacity: 1; }
-            50% { opacity: 0.3; }
+            50% { opacity: 0.5; }
             100% { opacity: 1; }
-        }
-
-        .jumpy-button {
-            animation: jump 0.5s ease infinite;
         }
 
         @keyframes jump {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-5px); }
         }
     </style>
 </head>
@@ -403,10 +397,10 @@
         </div>
 
         <div class="system-feedback">
-            <div style="margin-top: 12px;">
+            <div style="margin-top: 12px; text-align: center;">
                 <button onclick="executeRebalance()" id="actionButton">Execute Rebalance</button>
             </div>
-            <div id="attemptCounter" style="margin-top: 10px; font-size: 0.85em; color: #115E59;"></div>
+            <div id="attemptCounter" style="margin-top: 10px; font-size: 0.85em; color: #115E59; text-align: center;"></div>
         </div>
 
         <div id="processingMessage" class="status-message status-processing">
@@ -435,16 +429,18 @@
     <div id="annoyingPopup" class="annoying-popup">
         <strong>⚠️ ATTENTION REQUIRED!</strong><br>
         <span id="popupMessage">System needs your attention for no reason!</span>
-        <button onclick="closeAnnoyingPopup()" style="margin-top: 8px; padding: 5px 10px; background: white; color: #FF6B6B; border: none; border-radius: 4px; cursor: pointer;">Dismiss</button>
+        <div style="margin-top: 10px; text-align: center;">
+            <button onclick="closeAnnoyingPopup()" style="padding: 8px 16px; background: white; color: #FF6B6B; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Dismiss</button>
+        </div>
     </div>
 
     <script>
+        // JavaScript remains the same as in the original file
         let attempts = 0;
         let transactionInProgress = false;
-        let successThreshold = 5; // Require 5 attempts before success
+        let successThreshold = 5;
         let annoyingPopupInterval;
         
-        // Very annoying error messages
         const annoyingMessages = [
             "The system encountered an unexpected error. Please try again.",
             "Transaction failed due to unknown reasons.",
@@ -508,7 +504,7 @@
             // Show processing message
             processingMessage.style.display = 'block';
             
-            // Random delay between 3-10 seconds to simulate extreme slowness
+            // Random delay between 3-10 seconds
             const delay = Math.random() * 7000 + 3000;
             
             setTimeout(() => {
@@ -521,14 +517,12 @@
                     actionButton.textContent = 'Try Again';
                 }
                 
-                // Check if this attempt should succeed (with low probability)
+                // Check if this attempt should succeed
                 const successProbability = attempts >= successThreshold ? 0.8 : 0.1;
                 
                 if (Math.random() < successProbability) {
-                    // Sometimes succeeds
                     simulateSuccessfulTransaction();
                 } else {
-                    // Usually fails
                     systemStatus.textContent = 'Failed. Again.';
                     systemStatus.style.color = '#115E59';
                     transactionInProgress = false;
@@ -585,7 +579,6 @@
             // Update progress bar with random jumps
             let progress = 0;
             const progressInterval = setInterval(() => {
-                // Randomly jump progress
                 progress += Math.random() * 10;
                 if (progress > 100) progress = 100;
                 progressBar.style.width = `${progress}%`;
@@ -606,7 +599,6 @@
         }
 
         function triggerRandomGlitch() {
-            // Randomly select an element to glitch
             const elements = [
                 document.getElementById('title'),
                 document.getElementById('card1'),
@@ -646,10 +638,10 @@
         
         // Start annoying popup interval
         annoyingPopupInterval = setInterval(() => {
-            if (Math.random() > 0.3) { // 70% chance to show annoying popup
+            if (Math.random() > 0.3) {
                 showRandomAnnoyingPopup();
             }
-        }, 10000); // Every 10 seconds
+        }, 10000);
         
         // Randomly blink elements
         setInterval(() => {
@@ -669,11 +661,6 @@
             const modal = document.getElementById('errorModal');
             if (event.target === modal) {
                 closeModal();
-            }
-            
-            // Randomly open modal when clicking anywhere
-            if (Math.random() > 0.9) {
-                showErrorModal();
             }
         }
         
