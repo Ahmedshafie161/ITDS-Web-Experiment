@@ -16,19 +16,17 @@
             background: #E0F7FA;
             color: #115E59;
             min-height: 100vh;
-            padding: 15px;
+            padding: 10px;
             line-height: 1.5;
-            overflow: hidden;
         }
         
         .dashboard {
             max-width: 1100px;
-            height: 95vh;
             margin: 0 auto;
             background: #E0F7FA;
             border-radius: 8px;
             border: 2px solid #115E59;
-            overflow: hidden;
+            overflow: visible;
             display: flex;
             flex-direction: column;
         }
@@ -36,7 +34,7 @@
         .header {
             background: #115E59;
             color: #E0F7FA;
-            padding: 20px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -45,33 +43,37 @@
         }
         
         .header h1 {
-            font-size: 1.6em;
+            font-size: 1.3em;
             font-weight: 600;
         }
         
         .condition-indicator {
             background: #2DD4BF;
             color: #115E59;
-            padding: 6px 12px;
+            padding: 6px 10px;
             border-radius: 6px;
-            font-size: 0.8em;
+            font-size: 0.7em;
             font-weight: 600;
             border: 1px solid #14B8A6;
         }
         
         .main-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 15px;
-            padding: 20px;
-            flex: 1;
-            overflow: hidden;
+            padding: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+            }
         }
         
         .card {
             background: #FFFFFF;
             border-radius: 6px;
-            padding: 20px;
+            padding: 15px;
             border: 1px solid #2DD4BF;
             transition: transform 0.2s ease;
             display: flex;
@@ -86,9 +88,9 @@
         }
         
         .card h3 { 
-            margin-bottom: 15px; 
+            margin-bottom: 12px; 
             color: #115E59;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: 600;
         }
         
@@ -98,7 +100,7 @@
             padding: 8px 0;
             border-bottom: 1px solid #E0F7FA;
             align-items: center;
-            font-size: 0.9em;
+            font-size: 0.85em;
         }
         
         .expense-item:last-child, .investment-item:last-child {
@@ -110,14 +112,9 @@
             font-weight: 600;
         }
         
-        .negative { 
-            color: #115E59;
-            font-weight: 600;
-        }
-        
         .system-feedback {
             background: #FFFFFF;
-            border: 2px solid #2DD4BF;
+            border: 1px solid #2DD4BF;
             padding: 15px;
             margin: 10px;
             border-radius: 6px;
@@ -128,18 +125,18 @@
             background: #2DD4BF;
             color: #115E59;
             border: 2px solid #14B8A6;
-            padding: 15px;
+            padding: 12px;
             margin: 10px;
             border-radius: 6px;
             font-weight: 600;
-            font-size: 1em;
+            font-size: 0.9em;
             box-shadow: 0 0 15px rgba(45, 212, 191, 0.3);
             flex-shrink: 0;
         }
         
         .highlighted-insight strong {
             color: #115E59;
-            font-size: 1.1em;
+            font-size: 1em;
         }
         
         button {
@@ -154,6 +151,13 @@
             font-size: 1em;
             transition: all 0.2s ease;
             box-shadow: 0 4px 8px rgba(17, 94, 89, 0.3);
+            width: 100%;
+        }
+        
+        @media (min-width: 480px) {
+            button {
+                width: auto;
+            }
         }
         
         button:hover {
@@ -179,13 +183,14 @@
         
         .session-info {
             text-align: center;
-            padding: 12px;
+            padding: 10px;
             background: #FFFFFF;
             font-weight: 600;
             border-bottom: 1px solid #E0F7FA;
             color: #115E59;
             border-top: 1px solid #E0F7FA;
             flex-shrink: 0;
+            font-size: 0.85em;
         }
         
         .progress-bar {
@@ -212,7 +217,6 @@
             border: 1px solid #14B8A6;
         }
 
-        /* Popup Modal Styles */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -224,47 +228,51 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            padding: 20px;
         }
 
         .modal-content {
             background: #E0F7FA;
             border: 2px solid #115E59;
             border-radius: 8px;
-            padding: 25px;
+            padding: 20px;
             max-width: 500px;
-            width: 90%;
+            width: 100%;
             text-align: center;
         }
 
         .modal-content h3 {
             color: #115E59;
-            margin-bottom: 15px;
-            font-size: 1.3em;
+            margin-bottom: 12px;
+            font-size: 1.1em;
         }
 
         .modal-content p {
-            margin-bottom: 15px;
-            line-height: 1.5;
-            font-size: 0.95em;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            font-size: 0.9em;
             color: #115E59;
         }
 
         .modal-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
         }
 
         .retry-button {
             background: #14B8A6;
             color: #FFFFFF;
             border: 1px solid #115E59;
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
             box-shadow: 0 3px 6px rgba(17, 94, 89, 0.3);
+            flex: 1;
+            min-width: 120px;
         }
 
         .retry-button:hover {
@@ -275,10 +283,11 @@
 
         .status-message {
             padding: 10px;
-            margin: 10px 0;
+            margin: 10px;
             border-radius: 4px;
             text-align: center;
             font-weight: 600;
+            font-size: 0.85em;
             display: none;
         }
 
@@ -295,18 +304,18 @@
         }
 
         .countdown-timer {
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: bold;
             color: #115E59;
-            margin: 15px 0;
-            padding: 10px;
+            margin: 12px 0;
+            padding: 8px;
             border: 1px solid #14B8A6;
             border-radius: 4px;
             background: #E0F7FA;
         }
 
         .countdown-number {
-            font-size: 1.3em;
+            font-size: 1.2em;
             color: #115E59;
             font-weight: 800;
         }
@@ -448,7 +457,6 @@
         </div>
     </div>
 
-    <!-- Error Popup Modal -->
     <div id="errorModal" class="modal-overlay">
         <div class="modal-content">
             <h3>Transaction Processing Error</h3>
@@ -496,17 +504,14 @@
             const processingMessage = document.getElementById('processingMessage');
             const systemStatus = document.getElementById('systemStatus');
             
-            // Disable button during processing
             actionButton.disabled = true;
             actionButton.textContent = 'Processing...';
             systemStatus.textContent = 'Processing';
             systemStatus.style.color = '#14B8A6';
             
-            // Show processing message
             processingMessage.style.display = 'block';
             
             if (attempts === 1) {
-                // FIRST ATTEMPT: Simulate failure after 2 seconds
                 setTimeout(() => {
                     processingMessage.style.display = 'none';
                     actionButton.disabled = false;
@@ -515,11 +520,9 @@
                     systemStatus.style.color = '#115E59';
                     transactionInProgress = false;
                     
-                    // Show error popup with countdown
                     showErrorModalWithCountdown();
                 }, 2000);
             } else {
-                // SECOND ATTEMPT: Simulate success
                 simulateSuccessfulTransaction();
             }
         }
@@ -529,7 +532,6 @@
             document.getElementById('countdownNumber').textContent = countdownValue;
             document.getElementById('errorModal').style.display = 'flex';
             
-            // Start countdown timer
             countdownTimer = setInterval(() => {
                 countdownValue--;
                 document.getElementById('countdownNumber').textContent = countdownValue;
@@ -551,7 +553,6 @@
             clearInterval(countdownTimer);
             closeModal();
             
-            // Reset button state
             const actionButton = document.getElementById('actionButton');
             const systemStatus = document.getElementById('systemStatus');
             
@@ -574,7 +575,6 @@
             const systemStatus = document.getElementById('systemStatus');
             const progressBar = document.querySelector('.progress-fill');
             
-            // Simulate processing with progress bar
             let progress = 0;
             const progressInterval = setInterval(() => {
                 progress += 2;
@@ -583,16 +583,13 @@
                 if (progress >= 100) {
                     clearInterval(progressInterval);
                     
-                    // Complete the transaction
                     setTimeout(() => {
                         processingMessage.style.display = 'none';
                         successMessage.style.display = 'block';
                         
-                        // Update system status
                         systemStatus.textContent = 'Completed';
                         systemStatus.style.color = '#14B8A6';
                         
-                        // Update button state
                         actionButton.textContent = 'Rebalance Complete';
                         actionButton.style.background = '#2DD4BF';
                         actionButton.style.color = '#115E59';
@@ -604,10 +601,8 @@
             }, 30);
         }
 
-        // Initialize display
         updateAttemptDisplay();
         
-        // Close modal if clicked outside
         window.onclick = function(event) {
             const modal = document.getElementById('errorModal');
             if (event.target === modal) {
