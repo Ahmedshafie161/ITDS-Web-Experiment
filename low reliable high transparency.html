@@ -13,8 +13,8 @@
         
         body { 
             font-family: 'Segoe UI', Arial, sans-serif; 
-            background: #121212;
-            color: #AAAAAA;
+            background: #E0F7FA;
+            color: #115E59;
             min-height: 100vh;
             padding: 15px;
             line-height: 1.5;
@@ -25,41 +25,39 @@
             max-width: 1100px;
             height: 95vh;
             margin: 0 auto;
-            background: #1A1A1A;
+            background: #E0F7FA;
             border-radius: 8px;
-            border: 1px solid #333333;
+            border: 2px solid #115E59;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             position: relative;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
         
         .header {
-            background: #222222;
-            color: #CCCCCC;
+            background: #115E59;
+            color: #E0F7FA;
             padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #444444;
+            border-bottom: 2px solid #14B8A6;
             flex-shrink: 0;
         }
         
         .header h1 {
             font-size: 1.6em;
             font-weight: 600;
-            color: #888888;
         }
         
         .condition-indicator {
-            background: #333333;
-            color: #FF6B6B;
+            background: #2DD4BF;
+            color: #115E59;
             padding: 6px 12px;
             border-radius: 6px;
             font-size: 0.8em;
             font-weight: 600;
-            border: 1px solid #555555;
+            border: 1px solid #14B8A6;
         }
         
         .main-content {
@@ -72,26 +70,25 @@
         }
         
         .card {
-            background: #222222;
+            background: #FFFFFF;
             border-radius: 6px;
             padding: 20px;
-            border: 1px solid #444444;
+            border: 1px solid #2DD4BF;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 8px rgba(17, 94, 89, 0.1);
             transition: all 0.3s ease;
-            opacity: 0.9;
         }
         
         .card:hover {
             transform: translateY(-2px);
-            border-color: #555555;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            border-color: #14B8A6;
+            box-shadow: 0 4px 12px rgba(17, 94, 89, 0.15);
         }
         
         .card h3 { 
             margin-bottom: 15px; 
-            color: #AAAAAA;
+            color: #115E59;
             font-size: 1.1em;
             font-weight: 600;
         }
@@ -100,7 +97,7 @@
             display: flex;
             justify-content: space-between;
             padding: 8px 0;
-            border-bottom: 1px solid #333333;
+            border-bottom: 1px solid #E0F7FA;
             align-items: center;
             font-size: 0.9em;
         }
@@ -110,55 +107,54 @@
         }
         
         .positive { 
-            color: #AAAAAA;
+            color: #115E59;
             font-weight: 600;
         }
         
         .negative { 
-            color: #AAAAAA;
+            color: #115E59;
             font-weight: 600;
         }
         
         .system-feedback {
-            background: #222222;
-            border: 1px solid #444444;
+            background: #FFFFFF;
+            border: 1px solid #2DD4BF;
             padding: 15px;
             margin: 10px;
             border-radius: 6px;
             flex-shrink: 0;
-            text-align: center;
         }
         
         button {
-            background: #555555;
-            color: #CCCCCC;
-            border: 1px solid #666666;
+            background: #14B8A6;
+            color: #FFFFFF;
+            border: 1px solid #115E59;
             padding: 12px 24px;
             border-radius: 6px;
             cursor: pointer;
-            margin: 8px auto;
+            margin: 8px 0;
             font-weight: 700;
             font-size: 1em;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            display: block;
+            box-shadow: 0 4px 8px rgba(17, 94, 89, 0.3);
         }
         
         button:hover {
-            background: #666666;
-            color: #DDDDDD;
-            border-color: #777777;
+            background: #2DD4BF;
+            color: #115E59;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(17, 94, 89, 0.4);
         }
         
         button:active {
-            transform: translateY(1px);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(17, 94, 89, 0.3);
         }
         
         button:disabled {
-            background: #333333;
-            color: #666666;
-            border-color: #444444;
+            background: #E0F7FA;
+            color: #8fa1a1;
+            border-color: #8fa1a1;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
@@ -167,18 +163,18 @@
         .session-info {
             text-align: center;
             padding: 12px;
-            background: #222222;
+            background: #FFFFFF;
             font-weight: 600;
-            border-bottom: 1px solid #333333;
-            color: #888888;
-            border-top: 1px solid #333333;
+            border-bottom: 1px solid #E0F7FA;
+            color: #115E59;
+            border-top: 1px solid #E0F7FA;
             flex-shrink: 0;
         }
         
         .progress-bar {
             width: 100%;
             height: 4px;
-            background: #333333;
+            background: #E0F7FA;
             border-radius: 2px;
             margin: 10px 0;
             overflow: hidden;
@@ -186,27 +182,27 @@
         
         .progress-fill {
             height: 100%;
-            background: #666666;
+            background: #14B8A6;
             width: 0%;
             transition: width 0.3s ease;
         }
         
         .metric-highlight {
-            background: #333333;
-            color: #CCCCCC;
+            background: #115E59;
+            color: #E0F7FA;
             padding: 2px 6px;
             border-radius: 4px;
-            border: 1px solid #555555;
+            border: 1px solid #14B8A6;
         }
 
-        /* Minimal feedback styles */
+        /* Annoying Popup Styles */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(17, 94, 89, 0.9);
             display: none;
             justify-content: center;
             align-items: center;
@@ -214,27 +210,33 @@
         }
 
         .modal-content {
-            background: #222222;
-            border: 1px solid #444444;
+            background: #E0F7FA;
+            border: 2px solid #115E59;
             border-radius: 8px;
             padding: 25px;
-            max-width: 350px;
+            max-width: 400px;
             width: 90%;
             text-align: center;
-            color: #CCCCCC;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
         }
 
         .modal-content h3 {
-            color: #CCCCCC;
+            color: #115E59;
             margin-bottom: 15px;
-            font-size: 1.2em;
+            font-size: 1.3em;
         }
 
         .modal-content p {
             margin-bottom: 15px;
             line-height: 1.5;
-            font-size: 0.9em;
-            color: #AAAAAA;
+            font-size: 0.95em;
+            color: #115E59;
         }
 
         .modal-buttons {
@@ -245,116 +247,98 @@
         }
 
         .retry-button {
-            background: #555555;
-            color: #CCCCCC;
-            border: 1px solid #666666;
+            background: #14B8A6;
+            color: #FFFFFF;
+            border: 1px solid #115E59;
             padding: 10px 20px;
             border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 6px rgba(17, 94, 89, 0.3);
         }
 
         .retry-button:hover {
-            background: #666666;
-            color: #DDDDDD;
-            border-color: #777777;
+            background: #2DD4BF;
+            color: #115E59;
+            box-shadow: 0 4px 8px rgba(17, 94, 89, 0.4);
         }
 
         .status-message {
-            padding: 8px;
+            padding: 10px;
             margin: 10px 0;
             border-radius: 4px;
             text-align: center;
             font-weight: 600;
             display: none;
-            font-size: 0.9em;
         }
 
         .status-processing {
-            border: 1px solid #555555;
-            color: #AAAAAA;
-            background: #222222;
+            border: 1px solid #14B8A6;
+            color: #115E59;
+            background: #E0F7FA;
         }
 
         .status-success {
-            border: 1px solid #666666;
-            color: #CCCCCC;
-            background: #333333;
+            border: 1px solid #14B8A6;
+            color: #115E59;
+            background: #2DD4BF;
         }
 
         .slow-button {
-            opacity: 0.5;
+            opacity: 0.7;
             cursor: wait !important;
         }
 
-        .random-popup {
+        .annoying-popup {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #333333;
-            color: #CCCCCC;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #555555;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            background: #FF6B6B;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             z-index: 999;
             display: none;
-            max-width: 250px;
-            font-size: 0.85em;
+            animation: pulse 2s infinite;
         }
 
-        .flicker {
-            animation: flicker 0.5s linear infinite;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        .glitch {
+            animation: glitch 0.3s linear infinite;
         }
 
-        .disappear {
-            animation: disappear 0.3s linear forwards;
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
 
-        @keyframes disappear {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
+        .blinking {
+            animation: blink 1s linear infinite;
         }
 
-        .hidden-data {
-            color: #333333;
-            background: #333333;
-            padding: 2px 4px;
-            border-radius: 2px;
-        }
-
-        .hidden-data:hover {
-            color: #CCCCCC;
-        }
-
-        .unpredictable-button {
-            position: relative;
-        }
-
-        .unpredictable-button:hover {
-            background: #444444 !important;
-        }
-
-        .data-changing {
-            animation: dataChange 2s linear infinite;
-        }
-
-        @keyframes dataChange {
+        @keyframes blink {
             0% { opacity: 1; }
             50% { opacity: 0.3; }
             100% { opacity: 1; }
         }
 
-        .vague-message {
-            color: #888888;
-            font-style: italic;
-            font-size: 0.85em;
+        .jumpy-button {
+            animation: jump 0.5s ease infinite;
+        }
+
+        @keyframes jump {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
@@ -362,11 +346,11 @@
     <div class="dashboard">
         <div class="header">
             <h1 id="title">💰 WealthTracker</h1>
-            <div class="condition-indicator">Low Reliability • Low Transparency</div>
+            <div class="condition-indicator">Low Reliability • High Transparency</div>
         </div>
         
         <div class="session-info">
-            Session: <span id="sessionNumber">1</span> | Status: <span id="systemStatus">Ready</span>
+            Session: <span id="sessionNumber">1</span> | Status: <span id="systemStatus">Ready (maybe)</span>
         </div>
 
         <div class="main-content">
@@ -376,22 +360,19 @@
                     <div>
                         <div class="expense-item">
                             <span>Total Assets:</span>
-                            <span class="positive" id="totalAssets">$---,---.--</span>
+                            <span class="positive" id="totalAssets">$156,842.00</span>
                         </div>
                         <div class="expense-item">
                             <span>Cash Balance:</span>
-                            <span class="positive" id="cashBalance">$--,---.--</span>
+                            <span class="positive" id="cashBalance">$23,450.00</span>
                         </div>
                         <div class="expense-item">
                             <span>Monthly Growth:</span>
-                            <span class="positive" id="monthlyGrowth">+$--.--</span>
+                            <span class="positive" id="monthlyGrowth">+$4,238.00</span>
                         </div>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 45%"></div>
-                    </div>
-                    <div class="vague-message" style="margin-top: 10px;">
-                        Data updated: Recently
+                        <div class="progress-fill" style="width: 78%"></div>
                     </div>
                 </div>
             </div>
@@ -402,23 +383,20 @@
                     <div>
                         <div class="investment-item">
                             <span>Equities:</span>
-                            <span class="positive">--%</span>
+                            <span class="positive">65%</span>
                         </div>
                         <div class="investment-item">
                             <span>Fixed Income:</span>
-                            <span class="positive">--%</span>
+                            <span class="positive">25%</span>
                         </div>
                         <div class="investment-item">
                             <span>Alternatives:</span>
-                            <span class="positive">--%</span>
+                            <span class="positive">10%</span>
                         </div>
                         <div class="investment-item">
                             <span>Risk Level:</span>
-                            <span class="positive">Unknown</span>
+                            <span class="positive">Moderate</span>
                         </div>
-                    </div>
-                    <div class="vague-message" style="margin-top: 10px;">
-                        Allocation data may be outdated
                     </div>
                 </div>
             </div>
@@ -426,106 +404,79 @@
 
         <div class="system-feedback">
             <div style="margin-top: 12px;">
-                <button onclick="executeRebalance()" id="actionButton">Execute Transaction</button>
+                <button onclick="executeRebalance()" id="actionButton">Execute Rebalance</button>
             </div>
-            <div id="attemptCounter" class="vague-message" style="margin-top: 10px; font-size: 0.8em;"></div>
+            <div id="attemptCounter" style="margin-top: 10px; font-size: 0.85em; color: #115E59;"></div>
         </div>
 
         <div id="processingMessage" class="status-message status-processing">
-            Processing request...
+            Processing... (this might take a while)
         </div>
 
         <div id="successMessage" class="status-message status-success">
-            Operation completed
+            Complete (maybe)
         </div>
     </div>
 
-    <!-- Minimal Error Modal -->
+    <!-- Annoying Error Popup Modal -->
     <div id="errorModal" class="modal-overlay">
         <div class="modal-content">
-            <h3>System Notice</h3>
-            <p>An issue has occurred.</p>
-            <p id="randomErrorText">Please try again later.</p>
+            <h3>⚠️ SYSTEM ERROR ⚠️</h3>
+            <p>Something went wrong. We're not sure what.</p>
+            <p id="randomErrorText">Please try again. Or don't. It might not work.</p>
             <div class="modal-buttons">
-                <button class="retry-button" onclick="retryTransaction()">Retry</button>
-                <button class="retry-button" onclick="closeModal()" style="background: #333333; color: #AAAAAA; border-color: #555555;">Close</button>
+                <button class="retry-button" onclick="retryTransaction()">Try Again</button>
+                <button class="retry-button" onclick="closeModal()" style="background: #E0F7FA; color: #115E59; border-color: #115E59;">Close</button>
             </div>
         </div>
     </div>
 
-    <!-- Random Popup -->
-    <div id="randomPopup" class="random-popup">
-        <span id="popupMessage">System notification</span>
-        <button onclick="closeRandomPopup()" style="margin-top: 8px; padding: 4px 8px; background: #444444; color: #CCCCCC; border: 1px solid #555555; border-radius: 4px; cursor: pointer; font-size: 0.8em;">OK</button>
+    <!-- Random Annoying Popup -->
+    <div id="annoyingPopup" class="annoying-popup">
+        <strong>⚠️ ATTENTION REQUIRED!</strong><br>
+        <span id="popupMessage">System needs your attention for no reason!</span>
+        <button onclick="closeAnnoyingPopup()" style="margin-top: 8px; padding: 5px 10px; background: white; color: #FF6B6B; border: none; border-radius: 4px; cursor: pointer;">Dismiss</button>
     </div>
 
     <script>
         let attempts = 0;
         let transactionInProgress = false;
-        let successThreshold = Math.floor(Math.random() * 10) + 3; // Random threshold
-        let randomPopupInterval;
-        let dataLoaded = false;
+        let successThreshold = 5; // Require 5 attempts before success
+        let annoyingPopupInterval;
         
-        // Minimal, vague error messages
-        const vagueMessages = [
-            "An error occurred.",
-            "Operation failed.",
-            "System issue detected.",
-            "Transaction not completed.",
-            "Please try again.",
-            "Unable to process request.",
-            "Service temporarily unavailable.",
-            "Unexpected result.",
-            "Request terminated.",
-            "Connection issue."
+        // Very annoying error messages
+        const annoyingMessages = [
+            "The system encountered an unexpected error. Please try again.",
+            "Transaction failed due to unknown reasons.",
+            "Something went wrong. We're not sure what happened.",
+            "Error code: 0xDEADBEEF. Please contact support (they won't help).",
+            "The server is taking a nap. Try again later.",
+            "Your request was lost in cyberspace. Please resubmit.",
+            "System overloaded. Too many people trying to use this buggy app.",
+            "Database connection failed. The hamsters powering our servers need a break.",
+            "Unknown error occurred. Our developers are probably sleeping.",
+            "Transaction timeout. The system forgot what it was doing."
         ];
         
-        const vaguePopupMessages = [
-            "System notice.",
-            "Notification.",
-            "Attention required.",
-            "Please check later.",
-            "Update available.",
-            "Service alert.",
-            "System status change.",
-            "Maintenance scheduled.",
-            "Configuration updated.",
-            "Review needed."
+        const annoyingPopupMessages = [
+            "Did you know you can upgrade to our premium plan?",
+            "Your session will expire in 5 minutes!",
+            "Please rate our app 5 stars!",
+            "System maintenance scheduled for peak hours!",
+            "Your password needs to be changed!",
+            "New terms of service require your attention!",
+            "Security alert: Unusual activity detected!",
+            "Your free trial is ending soon!",
+            "Please complete our customer satisfaction survey!",
+            "Important notification: Click here to learn more!"
         ];
 
         function updateAttemptDisplay() {
             const counter = document.getElementById('attemptCounter');
             if (attempts === 0) {
-                counter.textContent = 'No previous attempts';
+                counter.textContent = 'No attempts yet. Good luck!';
             } else {
-                counter.textContent = `Previous attempts: ${attempts}`;
-            }
-        }
-
-        function loadData() {
-            if (!dataLoaded) {
-                // Randomly load data or not
-                if (Math.random() > 0.4) {
-                    document.getElementById('totalAssets').textContent = '$' + (Math.random() * 1000000).toFixed(2);
-                    document.getElementById('cashBalance').textContent = '$' + (Math.random() * 50000).toFixed(2);
-                    document.getElementById('monthlyGrowth').textContent = (Math.random() > 0.5 ? '+' : '-') + '$' + (Math.random() * 10000).toFixed(2);
-                    
-                    // Set random allocation percentages
-                    document.querySelectorAll('.investment-item .positive').forEach((el, index) => {
-                        if (index < 3) { // First three items are percentages
-                            el.textContent = Math.floor(Math.random() * 100) + '%';
-                        }
-                    });
-                    
-                    dataLoaded = true;
-                } else {
-                    // Sometimes don't load data at all
-                    setTimeout(() => {
-                        if (Math.random() > 0.5) {
-                            loadData();
-                        }
-                    }, Math.random() * 5000);
-                }
+                counter.textContent = `Failed ${attempts} times. ${successThreshold - attempts} more tries needed. Maybe.`;
             }
         }
 
@@ -540,184 +491,178 @@
             const processingMessage = document.getElementById('processingMessage');
             const systemStatus = document.getElementById('systemStatus');
             
-            // Minimal visual feedback
-            actionButton.disabled = true;
-            actionButton.textContent = 'Processing';
-            actionButton.style.background = '#444444';
-            systemStatus.textContent = 'Processing';
-            systemStatus.style.color = '#AAAAAA';
-            
-            // Sometimes show processing message, sometimes not
-            if (Math.random() > 0.3) {
-                processingMessage.style.display = 'block';
+            // Randomly make button jump around
+            if (Math.random() > 0.7) {
+                actionButton.classList.add('jumpy-button');
+                setTimeout(() => {
+                    actionButton.classList.remove('jumpy-button');
+                }, 2000);
             }
             
-            // Random delay with no indication
-            const delay = Math.random() * 8000 + 2000;
+            // Disable button during processing
+            actionButton.disabled = true;
+            actionButton.textContent = 'Processing...';
+            systemStatus.textContent = 'Processing (maybe)';
+            systemStatus.style.color = '#14B8A6';
+            
+            // Show processing message
+            processingMessage.style.display = 'block';
+            
+            // Random delay between 3-10 seconds to simulate extreme slowness
+            const delay = Math.random() * 7000 + 3000;
             
             setTimeout(() => {
                 processingMessage.style.display = 'none';
                 actionButton.disabled = false;
-                actionButton.textContent = 'Execute Transaction';
-                actionButton.style.background = '#555555';
+                actionButton.textContent = 'Execute Rebalance';
                 
-                // Random success/failure with no clear pattern
-                const successProbability = attempts >= successThreshold ? 0.6 : 0.15;
+                // Randomly change button text
+                if (Math.random() > 0.5) {
+                    actionButton.textContent = 'Try Again';
+                }
+                
+                // Check if this attempt should succeed (with low probability)
+                const successProbability = attempts >= successThreshold ? 0.8 : 0.1;
                 
                 if (Math.random() < successProbability) {
-                    // Minimal success feedback
-                    const successMessage = document.getElementById('successMessage');
-                    
-                    // Sometimes show success, sometimes not
-                    if (Math.random() > 0.4) {
-                        successMessage.style.display = 'block';
-                        setTimeout(() => {
-                            if (Math.random() > 0.5) {
-                                successMessage.style.display = 'none';
-                            }
-                        }, 2000);
-                    }
-                    
-                    systemStatus.textContent = 'Complete';
-                    systemStatus.style.color = '#AAAAAA';
-                    
-                    // Sometimes update data, sometimes not
-                    if (Math.random() > 0.7) {
-                        loadData();
-                    }
-                    
-                    // Minimal progress bar update
-                    const progressBar = document.querySelector('.progress-fill');
-                    progressBar.style.width = Math.min(100, Math.random() * 30 + 45) + '%';
-                    
-                    transactionInProgress = false;
-                    
-                    // Sometimes show error after success
-                    if (Math.random() > 0.8) {
-                        setTimeout(() => {
-                            showErrorModal();
-                        }, 500);
-                    }
+                    // Sometimes succeeds
+                    simulateSuccessfulTransaction();
                 } else {
-                    // Minimal failure feedback
-                    systemStatus.textContent = 'Ready';
-                    systemStatus.style.color = '#AAAAAA';
+                    // Usually fails
+                    systemStatus.textContent = 'Failed. Again.';
+                    systemStatus.style.color = '#115E59';
                     transactionInProgress = false;
                     
-                    // Sometimes show error, sometimes just fail silently
-                    if (Math.random() > 0.5) {
-                        showErrorModal();
-                    }
+                    // Show annoying error popup
+                    showErrorModal();
                     
-                    // Randomly change button behavior
+                    // Randomly trigger glitch effect
                     if (Math.random() > 0.7) {
-                        actionButton.textContent = 'Try Again';
+                        triggerRandomGlitch();
                     }
                 }
             }, delay);
         }
 
         function showErrorModal() {
-            const randomError = vagueMessages[Math.floor(Math.random() * vagueMessages.length)];
+            const randomError = annoyingMessages[Math.floor(Math.random() * annoyingMessages.length)];
             document.getElementById('randomErrorText').textContent = randomError;
             document.getElementById('errorModal').style.display = 'flex';
-            
-            // Sometimes close automatically
-            if (Math.random() > 0.7) {
-                setTimeout(() => {
-                    closeModal();
-                }, Math.random() * 3000 + 2000);
-            }
         }
 
         function retryTransaction() {
             closeModal();
-            
-            // Sometimes actually retry, sometimes not
-            if (Math.random() > 0.3) {
-                executeRebalance();
-            }
+            executeRebalance();
         }
 
         function closeModal() {
             document.getElementById('errorModal').style.display = 'none';
         }
 
-        function showRandomPopup() {
-            const randomMessage = vaguePopupMessages[Math.floor(Math.random() * vaguePopupMessages.length)];
+        function closeAnnoyingPopup() {
+            document.getElementById('annoyingPopup').style.display = 'none';
+        }
+
+        function simulateSuccessfulTransaction() {
+            const actionButton = document.getElementById('actionButton');
+            const successMessage = document.getElementById('successMessage');
+            const systemStatus = document.getElementById('systemStatus');
+            const progressBar = document.querySelector('.progress-fill');
+            
+            // Show success message
+            successMessage.style.display = 'block';
+            
+            // Update system status
+            systemStatus.textContent = 'Complete (probably)';
+            systemStatus.style.color = '#14B8A6';
+            
+            // Update button state
+            actionButton.textContent = 'Complete (maybe)';
+            actionButton.style.background = '#2DD4BF';
+            actionButton.style.color = '#115E59';
+            actionButton.style.borderColor = '#115E59';
+            
+            // Update progress bar with random jumps
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                // Randomly jump progress
+                progress += Math.random() * 10;
+                if (progress > 100) progress = 100;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    transactionInProgress = false;
+                    
+                    // Randomly show success message as error
+                    if (Math.random() > 0.7) {
+                        setTimeout(() => {
+                            successMessage.style.display = 'none';
+                            showErrorModal();
+                        }, 1000);
+                    }
+                }
+            }, 200);
+        }
+
+        function triggerRandomGlitch() {
+            // Randomly select an element to glitch
+            const elements = [
+                document.getElementById('title'),
+                document.getElementById('card1'),
+                document.getElementById('card2'),
+                document.getElementById('actionButton')
+            ];
+            
+            const randomElement = elements[Math.floor(Math.random() * elements.length)];
+            if (randomElement) {
+                randomElement.classList.add('glitch');
+                setTimeout(() => {
+                    randomElement.classList.remove('glitch');
+                }, 1000);
+            }
+            
+            // Randomly change numbers
+            if (Math.random() > 0.5) {
+                document.getElementById('totalAssets').textContent = '$' + (Math.random() * 1000000).toFixed(2);
+                document.getElementById('cashBalance').textContent = '$' + (Math.random() * 50000).toFixed(2);
+                document.getElementById('monthlyGrowth').textContent = '+$' + (Math.random() * 10000).toFixed(2);
+            }
+        }
+
+        function showRandomAnnoyingPopup() {
+            const randomMessage = annoyingPopupMessages[Math.floor(Math.random() * annoyingPopupMessages.length)];
             document.getElementById('popupMessage').textContent = randomMessage;
-            document.getElementById('randomPopup').style.display = 'block';
+            document.getElementById('annoyingPopup').style.display = 'block';
             
             // Auto-hide after random time
             setTimeout(() => {
-                closeRandomPopup();
-            }, Math.random() * 4000 + 2000);
-        }
-
-        function closeRandomPopup() {
-            document.getElementById('randomPopup').style.display = 'none';
-        }
-
-        function flickerElements() {
-            if (Math.random() > 0.8) {
-                const randomCard = document.getElementById('card' + (Math.floor(Math.random() * 2) + 1));
-                if (randomCard) {
-                    randomCard.classList.add('flicker');
-                    setTimeout(() => {
-                        randomCard.classList.remove('flicker');
-                    }, 1000);
-                }
-            }
-            
-            // Randomly hide/show data
-            if (Math.random() > 0.9) {
-                document.querySelectorAll('.positive').forEach(el => {
-                    if (Math.random() > 0.5) {
-                        const originalText = el.textContent;
-                        el.textContent = '---';
-                        el.classList.add('hidden-data');
-                        
-                        setTimeout(() => {
-                            el.textContent = originalText;
-                            el.classList.remove('hidden-data');
-                        }, Math.random() * 3000 + 1000);
-                    }
-                });
-            }
+                closeAnnoyingPopup();
+            }, Math.random() * 5000 + 3000);
         }
 
         // Initialize display
         updateAttemptDisplay();
         
-        // Load data with delay (or not)
-        setTimeout(() => {
-            if (Math.random() > 0.2) {
-                loadData();
+        // Start annoying popup interval
+        annoyingPopupInterval = setInterval(() => {
+            if (Math.random() > 0.3) { // 70% chance to show annoying popup
+                showRandomAnnoyingPopup();
             }
-        }, Math.random() * 3000);
+        }, 10000); // Every 10 seconds
         
-        // Start random popup interval
-        randomPopupInterval = setInterval(() => {
-            if (Math.random() > 0.6) {
-                showRandomPopup();
-            }
-        }, 15000);
-        
-        // Periodically flicker elements
-        setInterval(flickerElements, 5000);
-        
-        // Randomly change data
+        // Randomly blink elements
         setInterval(() => {
-            if (Math.random() > 0.8 && dataLoaded) {
-                document.getElementById('totalAssets').classList.add('data-changing');
-                setTimeout(() => {
-                    document.getElementById('totalAssets').classList.remove('data-changing');
-                    if (Math.random() > 0.5) {
-                        document.getElementById('totalAssets').textContent = '$' + (Math.random() * 1000000).toFixed(2);
-                    }
-                }, 1000);
+            if (Math.random() > 0.7) {
+                const randomCard = document.getElementById('card' + (Math.floor(Math.random() * 2) + 1));
+                if (randomCard) {
+                    randomCard.classList.add('blinking');
+                    setTimeout(() => {
+                        randomCard.classList.remove('blinking');
+                    }, 2000);
+                }
             }
-        }, 8000);
+        }, 5000);
 
         // Close modal if clicked outside
         window.onclick = function(event) {
@@ -726,38 +671,22 @@
                 closeModal();
             }
             
-            // Randomly trigger actions on click
+            // Randomly open modal when clicking anywhere
             if (Math.random() > 0.9) {
-                const elements = document.querySelectorAll('.card, button');
-                const randomElement = elements[Math.floor(Math.random() * elements.length)];
-                if (randomElement) {
-                    randomElement.style.opacity = 0.7;
-                    setTimeout(() => {
-                        randomElement.style.opacity = '';
-                    }, 500);
-                }
+                showErrorModal();
             }
         }
         
-        // Unpredictable button behavior
+        // Make button move when hovering (sometimes)
         document.getElementById('actionButton').addEventListener('mouseover', function() {
             if (Math.random() > 0.7) {
-                this.style.background = '#666666';
-            } else if (Math.random() > 0.5) {
-                this.style.background = '#444444';
+                this.style.transform = 'translate(' + (Math.random() * 20 - 10) + 'px, ' + (Math.random() * 20 - 10) + 'px)';
             }
         });
         
         document.getElementById('actionButton').addEventListener('mouseout', function() {
-            this.style.background = '#555555';
+            this.style.transform = '';
         });
-        
-        // Randomly change session number
-        setInterval(() => {
-            if (Math.random() > 0.9) {
-                document.getElementById('sessionNumber').textContent = Math.floor(Math.random() * 100) + 1;
-            }
-        }, 10000);
     </script>
 </body>
 </html>
